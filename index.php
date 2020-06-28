@@ -1,4 +1,56 @@
+<?php 
+require 'db.php';
+session_start();
 
+$kundenid = $_GET['kunde'];
+$kundenid = intval($kundenid);
+$kunde = $mysqli->query("SELECT * FROM users WHERE id='$kundenid'");
+$kunde_erg = mysqli_fetch_assoc($kunde);
+$kunde_id = $kunde_erg['id'];
+$kunde_name = $kunde_erg['name'];
+$kunde_strasse = $kunde_erg['strasse'];
+$kunde_hausnummer = utf8_encode($kunde_erg['hausnummer']);
+$kunde_ort = $kunde_erg['ort'];
+$kunde_plz = utf8_encode($kunde_erg['postleitzahl']);
+$speisekarte_direkt= $kunde_erg['speisekarte_direkt'];
+
+if ($kunde_id == ""){
+	$kunde_id = "X";
+	header("Location: http://www.start.localmenu.de");
+} else {
+	if (! isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$client_ip = $_SERVER['REMOTE_ADDR'];
+	}
+	else {
+		$client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	}
+	$Time = time() + (2*60*60);
+	$loggingtime = date('Y-m-d H:i:s', $Time);
+	$sql2 = "INSERT INTO protokoll (Protokoll_TYP, Protokoll_TEXT, Protokoll_ZEIT, Protokoll_USER, Protokoll_IP) " 
+			. "VALUES ('Seitenaufruf','QR-Code oder Direktaufruf','$loggingtime', '$kunde_name', '$client_ip')";
+	$result_logging = $mysqli->query($sql2);	
+	if ($speisekarte_direkt != ""){
+		echo "<input id=speisekarte_direktaufruf value=1 hidden>";
+		// header("Location: http://www.localmenu.de/Kunden/" . $kundenid . "/speisekarte/speisekarte.pdf");
+	}
+}
+
+
+//echo "ID: " . $kunde_id;
+//echo "Vorname: " . $kunde_name;
+//$kunde_aktiv = utf8_encode($subdomain_kunde_erg['active']);
+/*
+if ($kunde_aktiv != 'on') {
+	echo '
+		<script> 
+			document.location.href="http://www.qrmenu.memento-grill.de/error.php"; 
+		</script>';
+}
+*/
+// echo $kunde_id;
+ $_SESSION['kunde_id'] = $kunde_id;
+
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -42,6 +94,25 @@
 					<i class="fas fa-moon"></i>
 			</a>
 		<div style="margin-top: 70px;background: var(--secondary);">
+	<?php 
+		if ($kunde_id != "X"){
+                  if ($profilbild == "1"){
+                    echo '<img src="Kunden/'.$kunde_id.'/logo/logo.png" class="headshot">';
+                  }else{
+                    echo '<img src="img/profilbild.png" class="headshot">';
+                  }
+			echo '
+			<br>
+			<h2 style="text-align: center;font-size: 3rem;">'. $kunde_name . '</h2>
+			<p style="text-align: center;"> '. $kunde_strasse . ' '. $kunde_hausnummer . ', '. $kunde_ort. ', '. $kunde_plz. ' </p>';
+		}else {
+		echo '
+		<div class="headshot" ></div>
+		<br>
+		<h2 style="text-align: center;font-size: 3rem;">BITTE QR-Code scannen.</h2>
+		<p style="text-align: center;">Per QR-Code identifizieren wir das Restaurant.</p>';
+		}
+		?>
 			</div>
 				<!--<a href="#0" class="card cd-btn cd-modal-trigger" style="padding: 5px 10px;">Corona-Eintrag</a>-->
 		<div class="middle" style="padding: 10px;background: var(--secondary);">
@@ -51,7 +122,7 @@
 							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
 								<ul class="cd-gallery">
 									<li class="cd-item" >
-										<a href="item-1.php/?kunde=" id="speisekarte_direkt">
+										<a href="item-1.php/?kunde=<?php echo $kunde_id;?>" id="speisekarte_direkt">
 											<div>
 												
 												<img src="img/menu_icon.png" class="cd-item-logo" />
@@ -69,7 +140,7 @@
 								<ul class="cd-gallery">
 									<!--<li class="cd-item" style="background-image: linear-gradient(to bottom right, black, #92D050);">-->
 									<li class="cd-item">		
-									<a href="item-2.php/?kunde=" >
+									<a href="item-2.php/?kunde=<?php echo $kunde_id;?>" >
 											<div>
 												
 												<img src="img/uhrzeit_icon.png" class="cd-item-logo" />
@@ -242,7 +313,7 @@
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
 								</span>
 							</div>
-							<input class="input100" type="text" name="kunden_id" value="" hidden>
+							<input class="input100" type="text" name="kunden_id" value="<?php echo $kunde_id;?>" hidden>
 							<!--
 							<div class="wrap-input100 validate-input" data-validate = "Anfangszeit ihres besuches muss eingetragen werden.">
 								<input class="input100" type="text" name="endzeit" placeholder="Besuchs-Endzeit">
