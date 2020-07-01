@@ -19,10 +19,7 @@ jQuery(document).ready(function($){
 		if($(event.target).is('.cd-gallery') && $('.fold-is-open').length > 0 ) toggleContent('', false);
 	})
 
-	if (document.getElementById("speisekarte_direktaufruf").value == 1){
-		document.getElementById('speisekarte_direkt').click();
-	}
-
+	
 	function openItemInfo(url) {
 		var mq = viewportSize();
 		if( gallery.offset().top > $(window).scrollTop() && mq != 'mobile') {
@@ -78,6 +75,7 @@ jQuery(document).ready(function($){
 		/* retrieve the content value of .cd-main::before to check the actua mq */
 		return window.getComputedStyle(document.querySelector('.cd-main'), '::before').getPropertyValue('content').replace(/"/g, "").replace(/'/g, "");
 	}
+
 	var modalTrigger = $('.cd-modal-trigger'),
 		transitionLayer = $('.cd-transition-layer'),
 		transitionBackground = transitionLayer.children(),
@@ -88,6 +86,7 @@ jQuery(document).ready(function($){
 		resize = false;
 
 	//set transitionBackground dimentions
+	
 	setLayerDimensions();
 	$(window).on('resize', function(){
 		if( !resize ) {

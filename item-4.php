@@ -43,29 +43,29 @@ echo "KundenID = " . $kundenid;
 </head>
 <body>
 	<div class="cd-fold-content single-page">
-		<h2>Corona-Besuchereintrag</h2>
-			<div class="bg-contact100" style="background-color: unset;margin-top: 5px;">
+	<h1 style="color: white;">Corona-Besuchereintrag</h1>
+			<div class="bg-contact100" style="background-color: unset;">
 				<div class="container-contact100">
 					<div class="wrap-contact100">
 						<div class="contact100-pic js-tilt" data-tilt>
 						</div>
 						<form class="contact100-form validate-form" id="corona" enctype="multipart/form-data" method="post">		
 							<div class="wrap-input100 validate-input" data-validate = "Vorname muss ausgefüllt werden">
-								<input class="input100" type="text" name="firstname" placeholder="Vorname">
+								<input class="input100" type="text" name="firstname" placeholder="Vorname" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-user" aria-hidden="true"></i>
 								</span>
 							</div>
 							<div class="wrap-input100 validate-input" data-validate = "Name muss ausgefüllt werden">
-								<input class="input100" type="text" name="lastname" placeholder="Name">
+								<input class="input100" type="text" name="lastname" placeholder="Name" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-user" aria-hidden="true"></i>
 								</span>
 							</div>
 							<div class="wrap-input100 validate-input" data-validate = "Straße, PLZ und Ort müssen ausgefüllt werden">
-								<input class="input100" type="text" name="adresse" placeholder="Adresse">
+								<input class="input100" type="text" name="adresse" placeholder="Adresse" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-address-card-o" aria-hidden="true"></i>
@@ -81,7 +81,7 @@ echo "KundenID = " . $kundenid;
 							</div>
 							-->
 							<div class="wrap-input100 validate-input" data-validate = "Telefonnummer muss ausgefüllt werden">
-								<input class="input100" type="text" name="telefonnummer" placeholder="Telefonnummer">
+								<input class="input100" type="text" name="telefonnummer" placeholder="Telefonnummer" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-phone" aria-hidden="true"></i>
@@ -89,13 +89,13 @@ echo "KundenID = " . $kundenid;
 							</div>
 							
 							<div class="wrap-input100 validate-input" data-validate = "Die vor. Aufenthaltsdauer Ihres Besuches muss eingetragen werden.">
-								<input class="input100" type="text" name="dauer" placeholder="Voraussichtliche Aufenthaltsdauer">
+								<input class="input100" type="text" name="dauer" placeholder="Vor. Aufenthaltsdauer" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
 								</span>
 							</div>
-							<input class="input100" type="text" name="kundenid" value="<?php echo $kundenid;?>" hidden>
+							<input class="input100" type="text" name="kunden_id" value="<?php echo $kunde_id;?>" hidden>
 							<!--
 							<div class="wrap-input100 validate-input" data-validate = "Anfangszeit ihres besuches muss eingetragen werden.">
 								<input class="input100" type="text" name="endzeit" placeholder="Besuchs-Endzeit">
@@ -113,48 +113,29 @@ echo "KundenID = " . $kundenid;
 						</form>
 					</div>
 				</div>
-			</div>
 	</div>
-	<div class="cd-popup" id="cd-corona" role="alert">
+<div class="cd-popup" id="cd-corona" role="alert">
 	<div class="cd-popup-container">
 			<p id="qrcode_success"></p>
+			<input hidden id="qrcode_value">
+			<div class="qrcode" id="qrcode" style="margin-bottom: 10px;width: 90%;margin: auto;" value=""></div>
+		<ul class="cd-buttons"><a style="background: var(--grundfarbe);
+    margin: 20px;" href="#0" onclick="hidePopup('corona','plus')">Weiteren Besucher eintragen</a>
+	   </ul>
+		
 	   <ul class="cd-buttons">
 		  <li><a href="#0" onclick="hidePopup('corona','bestätigen')">Okay</a></li>
 		  <li><a href="#0" onclick="hidePopup('corona','schließen')">Schließen</a></li>
 	   </ul>
-	   <a href="#0" class="cd-popup-close img-replace" onclick="hidePopup('clockpicker','bestätigen')"></a>
+	   <a href="#0" class="cd-popup-close img-replace" onclick="hidePopup('corona','bestätigen')"></a>
 	</div> <!-- cd-popup-container -->
 	
- </div> <!-- cd-popup -->
-	<div class="success-box fade_in_fade_out" id="success-box">
-	<div class="success-checkmark">
-		<div class="check-icon">
-			<span class="icon-line line-tip"></span>
-			<span class="icon-line line-long"></span>
-			<div class="icon-circle"></div>
-			<div class="icon-fix"></div>
-		</div>
-		<h5 style="margin: 30px auto;text-align: center;">Corona-Eintrag erfolgreich!</h5>
-	</div>
+</div> <!-- cd-popup -->
      
 </div>
 </body>
+
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
-<script>
-	function hidePopup(typ, event) { 
-
-			if(typ == 'corona') {
-				if (event == 'bestätigen') {
-					document.getElementById("cd-corona").style.visibility = "hidden";
-					document.getElementById("cd-corona").style.opacity = 0;
-				}
-				if (event == 'schließen') {
-					document.getElementById("cd-corona").style.visibility = "hidden";
-					document.getElementById("cd-corona").style.opacity = 0;
-				}
-			}
-	}
-</script>
 </body>
 </html>

@@ -78,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
           <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="">Druckauftrag</a>
-          <a class="nav-item nav-link" href="">AGBs</a>
           <a class="nav-item nav-link" href="corona_liste.php">Corona-Einträge</a>
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
@@ -135,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               
 </div>
 <div class="container">
-  <div class="card bg-light mb-3" style="margin-top:10px;" style="overflow: hidden;min-width: 100%;border-radius: 2rem;background: var(--secondary);
+  <div class="card bg-light mb-3" style="margin-top:10px;overflow: hidden;min-width: 100%;border-radius: 2rem;background: var(--secondary);
   box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border: unset;">
     <div class="card-header">QR-Code</div>
     <div class="card-body">
@@ -164,9 +163,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <h3>Aktuelle Speisekarte</h3>
         <?php 
                 if ($speisekarte == "1"){
-                  echo '<iframe src="Kunden/'. $kundeid.'/speisekarte/speisekarte.pdf" width="100%" height="700px"> </iframe>';
+                  echo '<iframe src="Kunden/'. $kundeid.'/speisekarte/speisekarte.pdf" width="100%" height="500px"> </iframe>';
                 }else{
-                  echo '<iframe src="dateien/speisekarte.pdf" width="100%" height="700px"> </iframe>';
+                  echo '<iframe src="dateien/speisekarte.pdf" width="100%" height="500px"> </iframe>';
                 }
         ?>
         <br>
@@ -234,11 +233,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <hr class="style-two">
 	<footer class="container-fluid text-footer" style="text-align:center;">
 	<!-- <p><a style="font-size: 12px;" href="#myModal2" class="links" id="modal-trigger2" data-toggle="modal">Allgemeine Geschäftsbedingungen</a></p> -->
-	<p><a style="font-size: 12px;" href="AGB.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
-	<p><a style="font-size: 12px;" href="Datenschutz.html" class="links" target="_blank">Datenschutzerklärung</a></p>
-	<p><a style="font-size: 12px;" href="Impressum.html" class="links" target="_blank">Impressum</a></p>
+	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
+	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
+	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
 	<hr class="style-two">
-	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="Impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
+	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
 	</footer>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

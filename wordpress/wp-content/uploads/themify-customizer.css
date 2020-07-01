@@ -1,0 +1,58 @@
+/* Themify Customize Styling */
+body {	background: none;
+	background-color: #ffffff; 
+}
+.header-classic #headerwrap, #headerwrap {	background: none;
+	background-color: #ffffff; 
+}
+#header {	
+	color: #000000; 
+}
+#headerwrap a {		font-weight:bold;
+	font-weight:bold;
+
+	color: #000000; 
+}
+#headerwrap a:hover {	
+	color: #84948b; 
+}
+#pagewrap #headerwrap.fixed-header, .transparent-header #pagewrap #headerwrap.fixed-header {	background: none;
+	background-color: rgba(255,255,255,0.84); 
+}
+body[class*="themify"] #site-logo a img {		width: 130px; 
+}
+#site-logo {		position:relative;
+
+	top: 5px;
+	left: -px; 
+}
+#site-description {	display: none; 
+}
+#main-nav {	
+	background-color: transparent;	position:relative;
+
+	right: 0px;
+	padding-top: 13px; 
+}
+#main-nav a {	
+	padding-top: 5px; 
+}
+#main-nav a, #main-nav > li > a, .transparent-header #main-nav a {	
+	color: #000000; 
+}
+#main-nav-wrap #main-nav a:hover, #main-nav-wrap #main-nav > li > a:hover {	
+	color: #596156; 
+}
+#main-nav-wrap #main-nav .current_page_item > a, #main-nav .current-menu-item > a, #main-nav > .current_page_item > a, #main-nav > .current-menu-item > a {	
+	color: #000000; 
+}
+@media screen and (max-width: 1280px) { /* Themify Customize Styling */
+body[class*="themify"] #site-logo a img {		width: 130px; 
+}
+ }@media screen and (max-width: 768px) { /* Themify Customize Styling */
+body[class*="themify"] #site-logo a img {		width: 130px; 
+}
+ }@media screen and (max-width: 680px) { /* Themify Customize Styling */
+body[class*="themify"] #site-logo a img {		width: 130px; 
+}
+ }

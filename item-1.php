@@ -35,9 +35,12 @@ echo "KundenID = " . $kundenid;
 			echo '<iframe src="dateien/speisekarte.pdf" width="100%" height="100%"> </iframe>';
 		} else {
 			if ($speisekarte == "1"){
-				echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
+				// echo '<object data="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"></object>';
+				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width=100% height=100% type=application/pdf></iframe>';
+			 	// echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
 			  }else{
-				echo '<iframe src="dateien/speisekarte.pdf" width="100%" height="100%"> </iframe>';
+				// echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width=100% height=100% type=application/pdf>';
+				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width=100% height=100% type=application/pdf></iframe>';
 			  }
 		}
 		

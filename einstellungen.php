@@ -83,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
           <a class="nav-item nav-link   active" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="">Druckauftrag</a>
-          <a class="nav-item nav-link" href="">AGBs</a>
           <a class="nav-item nav-link" href="corona_liste.php">Corona-Einträge</a>
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
@@ -114,19 +113,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       <div class="form-row" >
           <div class="col-md-4 mb-3">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Geschäftsname</label>
                 <input class="form-control" type="text" id="name" name="name" placeholder="Name eingeben" value="<?php echo "" . $name; ?>">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                <label for="first_name">Vorname</label>
+                <label for="first_name">Vorname des Inhabers oder Bevollmächtigten</label>
                 <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Vorname eingeben" value="<?php echo "" . $first_name; ?>">
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                <label for="last_name">Nachname</label>
+                <label for="last_name">Nachname des Inhabers oder Bevollmächtigten</label>
                 <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Nachname eingeben" value="<?php echo "" . $last_name; ?>">
             </div>
         </div>

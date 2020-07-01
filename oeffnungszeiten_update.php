@@ -70,7 +70,7 @@ $sql = "UPDATE oeffnungszeiten SET MONTAG_GESCHLOSSEN='$montaggeschlossen',DIENS
 
 // if ($mysqli->query($result)) {
     // Add user to the database
-    echo $sql;
+    // echo $sql;
     if ( $mysqli->query($sql) ){
         
        // $_SESSION['active'] = 0; //0 until user activates their account with verify.php

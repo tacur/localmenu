@@ -17,11 +17,7 @@ if ( $_SESSION['logged_in'] != 1 ) {
   header("location: error.php");    
 }
 else {
-  if ( $_SESSION['admin'] != 1 ) {
-    $_SESSION['message'] =  "Du bist nicht berechtigt!";
-    header("location: profile.php");   
-  } else { 
-    // Makes it easier to read
+  
     $first_name = $_SESSION['first_name'];
     $last_name = $_SESSION['last_name'];
     $email = $_SESSION['email'];
@@ -33,7 +29,6 @@ else {
     $monatsstunden = $_SESSION['monatsstunden'];
     $kundeid = $_SESSION['kunde_id'];
     $kundefahrten = $_SESSION['kunde_fahrten'];
-  }
 }
 ?>
 
@@ -85,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
           <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="">Druckauftrag</a>
-          <a class="nav-item nav-link" href="">AGBs</a>
           <a class="nav-item nav-link   active" href="corona_liste.php">Corona-Einträge</a>
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
@@ -117,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <div class="container">
 <h3><u>Corona-Einträge (letzten 30 Tage):</u></h3>
 <div style="text-align:center;margin-bottom:10px;">
-  <button onclick='corona_absenden()' class='btn btn-success' style="width: 100%;" id="download" name='corona_daten_beauftragen'>Einträge absenden</button>
+  <button onclick='corona_absenden()' class='btn btn-success' style="width: 100%;" id="download" name='corona_daten_beauftragen'>Einträge anfordern</button>
 </div>
 <?php 
       if($result3->num_rows > 0){
@@ -130,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                             <th>Telefonnummer</th>
                             <th>Startzeit</th>
                             <th>Dauer</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -147,7 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     echo "<td>". $row['startzeit'] . "</td>" ;
                     echo "<td>". $row['dauer'] . "</td>" ;
                     */
-                    echo "<td><button onclick='corona_daten_beauftragen()' class='btn btn-success' name='corona_daten_beauftragen' value='" . $row['id'] . "'>Anfordern</button></td>" ;
                     echo "</tr>";
                   }
           echo "</tbody>
@@ -159,7 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         <th>Telefonnummer</th>
                         <th>Startzeit</th>
                         <th>Dauer</th>
-                        <th></th>
                       </tr>
                   </tfoot>
               </table>";
@@ -170,34 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       
     ?>
 </div>
-
-<div class="container">
-  <h3><u>TEST Corona-Einträge (letzten 30 Tage):</u></h3>
-  <?php 
-      if($result3->num_rows > 0){
-        while ( $row = $result3->fetch_assoc() ) {
-          echo '<div class="panel-gruop">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <div class="row">
-                                <div class="col-sm-12" style="padding-top: 5px;">
-                                    <a data-toggle="collapse" href="#tag'. $row['id'] .'">' . $dt . ' Vorname '. $row['first_name'] .' Nachname: ' . $row['last_name'] . '</a>
-                                </div>
-                            </div>
-                          </h4>
-                        </div>
-                        <div id="'. $row['id'] . '" class="panel-collapse collapse">
-                          <div class="panel-body"> Vorname:' . $row['first_name'] . '</div>                            
-                          <div class="panel-footer">Startzeit: ' . $row['startzeit'] . '</br>Dauer: ' . $row['dauer'] .'</br>Status: ' . $row['id'] . '</div>
-                        </div> 
-                    </div>
-                </div>';}
-      }else{
-        echo 'Du hast noch kein Corona-Beitrag erhalten.';
-      }
-      ?>
-</div><br>
+<br>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -234,13 +198,7 @@ $(document).ready(function() {
                   test();
       }); 
     }    
-    async function test() {
-      await Sleep(3000); 
-      history.go(0);
-    }
-    function Sleep(milliseconds) {
-      return new Promise(resolve => setTimeout(resolve, milliseconds));
-    }
+    
   }
   document.querySelector("#download").onclick = function () {
   
@@ -265,7 +223,7 @@ $(document).ready(function() {
                     pdf.addPage();
                     pdf.text ("Corona-Einträge der letzten 30 Tage", 20, 40);
                     pdf.addImage(img, "png", 20, 0, 70, 40);
-                    abstand = 40;
+                    abstand = 60;
                   }else{
                     abstand = abstand + 20;
                   }';
@@ -273,13 +231,36 @@ $(document).ready(function() {
           echo 'pdf.text ("' . $row['adresse'] .'", 75, abstand + 6);';
           echo 'pdf.text ("' . $row['telefonnummer'] .' ' . $row['dauer'] .'", 75, abstand + 11);';
         }
+        echo '
+        var pages = pdf.internal.getNumberOfPages();
+        var pageWidth = pdf.internal.pageSize.width;  //Optional
+        var pageHeight = pdf.internal.pageSize.height;  //Optional
+        for (let j = 1; j < pages + 1 ; j++) {
+              let horizontalPos = pageWidth / 2;  //Can be fixed number
+              let verticalPos = pageHeight - 10;  //Can be fixed number
+              pdf.setPage(j);
+              pdf.text("Seite " + j + " / " + pages, horizontalPos, verticalPos, {align: "center"});
+        }';
       echo "pdf.save ('corona_eintraege.pdf');";
       }else{
         echo 'Du hast noch kein Corona-Beitrag erhalten.';
       }
       ?>
+                var x = document.getElementById("snackbar");
+                  // Add the "show" class to DIV
+                  x.innerHTML = "Corona-Eintrag wurden exportiert. LocalMenu wurde darüber in Kenntnis gesetzt.";
+                  x.className = "show";
+                  // After 3 seconds, remove the show class from DIV
+                  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
+                  test();
 }
-  
+async function test() {
+      await Sleep(3000); 
+      history.go(0);
+    }
+    function Sleep(milliseconds) {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
 </script>
 
 </body>

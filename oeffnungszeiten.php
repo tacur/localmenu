@@ -108,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
           <a class="nav-item nav-link active" href="">Öffnungszeiten</a>
           <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="">Druckauftrag</a>
-          <a class="nav-item nav-link" href="">AGBs</a>
           <a class="nav-item nav-link" href="">Corona-Einträge</a>
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';

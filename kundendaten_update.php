@@ -30,7 +30,7 @@ $sql = "UPDATE users SET name='$kunde_name',first_name='$kunde_ort',last_name='$
         . "speisekarte_direkt='$kunde_speisekarte' "
         . "WHERE id='$result_id'";
 
-    echo $sql;
+    // echo $sql;
     if ( $mysqli->query($sql) ){
 
         $to      = $email;

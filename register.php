@@ -80,7 +80,7 @@ else { // Email doesn't already exist in a database, proceed...
                     ('00:00','00:00','00:00','00:00','00:00','00:00','00:00',
                     '$kunde_id',
                     '00:00','00:00','00:00','00:00','00:00','00:00','00:00',
-                    'Text1','Text2',
+                    '','',
                     '','','','','','','','','','','','','','')";
             if ($mysqli->query($sql2)) {
                 echo "Öffnungszeiten erstellt";

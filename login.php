@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 	<meta charset="UTF-8">
 	<meta name="theme-color" content="#8e793e">
-	<link rel="icon" sizes="192x192" href="img/favicon1.png">
+	<link rel="icon" sizes="192x192" href="img/favicon.png">
 	<meta name='viewport' content='width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0'/>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700|Merriweather:400italic,400' rel='stylesheet' type='text/css'>
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	<title>LOCALMENU</title>
 </head>
 			
-<body id="top" class="cd-about" style="background-color: var(--third);">
+<body id="top" class="cd-about" >
 	<section class="cd-intro" style="position: fixed; z-index: 10;">
 	<div class="cd-intro-content scale">
 		<div class="content-wrapper">
@@ -83,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     ?>
 <div id="anmeldung" class="container-fluid " style="background: linear-gradient(
 	rgb(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)) no-repeat center center; padding: 10px 0px 10px 0px">
-	<div class="middle">
-	<img src="img/logo.png" style="max-width: 50%; max-height: 200px;margin: auto;display: block;">
+	<div class="middle" style="text-align: center;">
+	<img src="img/logo.png" style="max-width: 90%; max-height: 200px;margin: auto;display: block;">
 <div class="container">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#login">Anmeldung</a></li>
@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <hr class="style-two">
 <footer class="container-fluid text-center" style="background: linear-gradient(
 	rgb(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)) no-repeat center center; color: var(--grundfarbe); padding: 0px;">
-  <p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="Impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
+  <p style="margin: 20px 0 20px 0;max-width: unset;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
 </footer>
 </div>
 	</div>

@@ -13,10 +13,11 @@ $kunde_hausnummer = utf8_encode($kunde_erg['hausnummer']);
 $kunde_ort = $kunde_erg['ort'];
 $kunde_plz = utf8_encode($kunde_erg['postleitzahl']);
 $speisekarte_direkt= $kunde_erg['speisekarte_direkt'];
+$profilbild= $kunde_erg['profilbild'];
 
 if ($kunde_id == ""){
 	$kunde_id = "X";
-	header("Location: http://www.start.localmenu.de");
+	header("Location: https://localmenu.de/info");
 } else {
 	if (! isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 		$client_ip = $_SERVER['REMOTE_ADDR'];
@@ -30,8 +31,14 @@ if ($kunde_id == ""){
 			. "VALUES ('Seitenaufruf','QR-Code oder Direktaufruf','$loggingtime', '$kunde_name', '$client_ip')";
 	$result_logging = $mysqli->query($sql2);	
 	if ($speisekarte_direkt != ""){
-		echo "<input id=speisekarte_direktaufruf value=1 hidden>";
+		// echo "<input id='speisekarte_direktaufruf' value='1' hidden>";
 		// header("Location: http://www.localmenu.de/Kunden/" . $kundenid . "/speisekarte/speisekarte.pdf");
+		/*echo "<script> 	$(document).ready(function(){   
+			document.getElementById('speisekarte_direkt').click();
+		});
+		</script>";
+		*/
+	
 	}
 }
 
@@ -114,6 +121,7 @@ if ($kunde_aktiv != 'on') {
 		}
 		?>
 			</div>
+			<input id='speisekarte_direktaufruf' value='0' hidden>
 				<!--<a href="#0" class="card cd-btn cd-modal-trigger" style="padding: 5px 10px;">Corona-Eintrag</a>-->
 		<div class="middle" style="padding: 10px;background: var(--secondary);">
 			<div class="row">
@@ -157,7 +165,7 @@ if ($kunde_aktiv != 'on') {
 							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
 								<ul class="cd-gallery" >
 									<li class="cd-item" >
-										<a href="item-1.php/?kunde=<?php echo $kunde_id;?>" >
+										<a href="item-3.php/?kunde=<?php echo $kunde_id;?>" >
 											<div>
 												
 												<img src="img/telefon_icon.png" class="cd-item-logo"  />
@@ -173,14 +181,17 @@ if ($kunde_aktiv != 'on') {
 							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
 							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
 								<ul class="cd-gallery">
-								<!--	<li class="cd-item" style="background-image: linear-gradient(to bottom right, black, #92D050);">
+								<!--
+									<li class="cd-item">
 										<a href="item-4.php/?kunde=<?php // echo $kunde_id;?>" >
 											<div>
-												<h2>Corona</h2>
-												<b>Öffnen</b>
+											<img src="img/corona_icon.png" class="cd-item-logo"  />
+											<h2 >Corona-Eintrag</h2>
 											</div>
 										</a>
-									</li> -->
+									</li> 
+									-->
+									
 									<li class="cd-item cd-modal-trigger" >
 										<div class="corona" style="display:unset;">
 											<div>
@@ -192,6 +203,8 @@ if ($kunde_aktiv != 'on') {
 											</div>
 										</div>
 									</li>
+									
+									
 								</ul>
 							</div>	
 					</div>		
@@ -201,10 +214,10 @@ if ($kunde_aktiv != 'on') {
 	<hr class="style-two">
 	<footer class="container-fluid text-footer" style="text-align:center;">
 	<!-- <p><a style="font-size: 12px;" href="#myModal2" class="links" id="modal-trigger2" data-toggle="modal">Allgemeine Geschäftsbedingungen</a></p> -->
-	<p><a style="font-size: 12px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
-	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
-	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
-	<p><a style="font-size: 12px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
+	<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--grundfarbe);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
+	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
+	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
+	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
 	<hr class="style-two">
 	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
 	</footer>
@@ -244,7 +257,7 @@ if ($kunde_aktiv != 'on') {
 		  <li><a href="#0" onclick="hidePopup('corona','bestätigen')">Okay</a></li>
 		  <li><a href="#0" onclick="hidePopup('corona','schließen')">Schließen</a></li>
 	   </ul>
-	   <a href="#0" class="cd-popup-close img-replace" onclick="hidePopup('clockpicker','bestätigen')"></a>
+	   <a href="#0" class="cd-popup-close img-replace" onclick="hidePopup('corona','bestätigen')"></a>
 	</div> <!-- cd-popup-container -->
 	
  </div> <!-- cd-popup -->
@@ -261,7 +274,7 @@ if ($kunde_aktiv != 'on') {
 </div>
 	<div class="cd-modal">
 		<div class="modal-content" style="background-color: unset;">
-			<h1>Corona-Besuchereintrag</h1>
+			<h1 style="color: white;">Corona-Besuchereintrag</h1>
 			<div class="bg-contact100" style="background-color: unset;">
 				<div class="container-contact100">
 					<div class="wrap-contact100">
@@ -357,6 +370,17 @@ if ($kunde_aktiv != 'on') {
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<?php 
+if ($speisekarte_direkt != ""){
+		// echo "<input id='speisekarte_direktaufruf' value='1' hidden>";
+		// header("Location: http://www.localmenu.de/Kunden/" . $kundenid . "/speisekarte/speisekarte.pdf");
+		echo "<script> 	$(document).ready(function(){   
+			document.getElementById('speisekarte_direkt').click();
+		});
+		</script>";
+	
+	}
+?>
 <script type="text/javascript">
 	// ##### COOKIE DARKMODE ######
 	$(document).ready(function(){   
