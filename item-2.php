@@ -107,147 +107,158 @@ switch ($tag) {
 	<div class="cd-fold-content single-page" style="padding: 10px;">
 		<h2>Öffnungszeiten</h2>
 		<div class="card bg-dark" style="margin-top: 5px;width: 100%; border-radius: 2rem;box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
-	<div class="card-body" style="padding: unset;">
-		<?php if($mitteilung_1 != "") {
-			echo "<div class='container'><div class='row'>"
-					. "<div class='col-sm-2'><i style='font-size:30px;color:var(--grundfarbe);' class='material-icons'>info</i></div>"
-					. "<div class='col-sm-10'><h4 style='text-align:center;'>" . $mitteilung_1 . "</h4></div>"
-				."</div></div>";
-				if($mitteilung_2 == "") {echo "<hr class='style-two'><br>";}
-		}
-		?>
-		<?php if($mitteilung_2 != "") {
-			echo "<div class='container'><div class='row'>"
-					. "<div class='col-sm-2'><i style='font-size:30px;color:var(--grundfarbe);' class='material-icons'>info</i></div>"
-					. "<div class='col-sm-10'><h4 style='text-align:center;'>" . $mitteilung_2 . "</h4></div>"
-				."</div></div><hr class='style-two'><br>";
-		}
-		?>
-		<ul class="list-group" style="max-width: 600px;margin:auto;border: 1px solid var(--grundfarbe); border-radius:2rem;">
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Montag</h6></div>
-						<?php 
-							if($montaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $montagstart . " Uhr</h6></div>";
-								if($montagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $montagende . " Uhr</h6></div>";
-								}
-							}
-						?>
+			<div class="card-body" style="padding: unset;">
+				<?php if($mitteilung_1 != "") {
+					echo "<div class='container'><div class='row'>"
+							. "<div class='col-sm-2'><i style='font-size:30px;color:var(--grundfarbe);' class='material-icons'>info</i></div>"
+							. "<div class='col-sm-10'><h4 style='text-align:center;'>" . $mitteilung_1 . "</h4></div>"
+						."</div></div>";
+						if($mitteilung_2 == "") {echo "<hr class='style-two'><br>";}
+				}
+				?>
+				<?php if($mitteilung_2 != "") {
+					echo "<div class='container'><div class='row'>"
+							. "<div class='col-sm-2'><i style='font-size:30px;color:var(--grundfarbe);' class='material-icons'>info</i></div>"
+							. "<div class='col-sm-10'><h4 style='text-align:center;'>" . $mitteilung_2 . "</h4></div>"
+						."</div></div><hr class='style-two'><br>";
+				}
+				?>
+				<ul class="list-group" style="max-width: 600px;margin:auto;border: 1px solid var(--grundfarbe); border-radius:2rem;">
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Montag</h6></div>
+								<?php 
+									if($montaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $montagstart . " Uhr</h6></div>";
+										if($montagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $montagende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Dienstag</h6></div>
+								<?php 
+									if($dienstaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $dienstagstart . " Uhr</h6></div>";
+										if($dienstagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $dienstagende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Mittwoch</h6></div>
+								<?php 
+									if($mittwochgeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $mittwochstart . " Uhr</h6></div>";
+										if($mittwochopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $mittwochende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Donnerstag</h6></div>
+								<?php 
+									if($donnerstaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $donnerstagstart . " Uhr</h6></div>";
+										if($donnerstagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $donnerstagende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Freitag</h6></div>
+								<?php 
+									if($freitaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $freitagstart . " Uhr</h6></div>";
+										if($freitagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $freitagende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Samstag</h6></div>
+								<?php 
+									if($samstaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $samstagstart . " Uhr</h6></div>";
+										if($samstagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $samstagende . " Uhr</h6></div>";
+										}
+									}
+								?>
+							</div>
+						</li>
+						<li class="list-group-item novisible" style="padding-right: unset;">
+							<div class="row rownowrap">
+								<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Sonntag</h6></div>
+								<?php 
+									if($sonntaggeschlossen == 'on'){
+										echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
+									} else {
+										echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $sonntagstart . " Uhr</h6></div>";
+										if($sonntagopenend == 'on'){
+											echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
+										} else {
+											echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $sonntagende . " Uhr</h6></div>";
+										}
+											
+									}
+								?>
+							</div>
+						</li>
+				</ul>
+			</div>
+		</div>
+		<div class="card bg-dark" style="margin-top: 5px;width: 100%; border-radius: 2rem;box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
+			<div class="card-body" style="padding: unset;">
+				<div class='container' style="padding: 15px;">
+					<div class='row'>
+							<div class='col-sm-12'>
+								<h4 style='text-align:center;'>Vielen	Dank,	dass	Sie	LocalMenu	nutzen	und	so	uns	helfen	die	Hygienevorschriften	einzuhalten.</h4>
+							</div>
 					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Dienstag</h6></div>
-						<?php 
-							if($dienstaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $dienstagstart . " Uhr</h6></div>";
-								if($dienstagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $dienstagende . " Uhr</h6></div>";
-								}
-							}
-						?>
-					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Mittwoch</h6></div>
-						<?php 
-							if($mittwochgeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $mittwochstart . " Uhr</h6></div>";
-								if($mittwochopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $mittwochende . " Uhr</h6></div>";
-								}
-							}
-						?>
-					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Donnerstag</h6></div>
-						<?php 
-							if($donnerstaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $donnerstagstart . " Uhr</h6></div>";
-								if($donnerstagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $donnerstagende . " Uhr</h6></div>";
-								}
-							}
-						?>
-					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Freitag</h6></div>
-						<?php 
-							if($freitaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $freitagstart . " Uhr</h6></div>";
-								if($freitagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $freitagende . " Uhr</h6></div>";
-								}
-							}
-						?>
-					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Samstag</h6></div>
-						<?php 
-							if($samstaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $samstagstart . " Uhr</h6></div>";
-								if($samstagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $samstagende . " Uhr</h6></div>";
-								}
-							}
-						?>
-					</div>
-				</li>
-				<li class="list-group-item novisible" style="padding-right: unset;">
-					<div class="row rownowrap">
-						<div class="col-sm-4 nomargin" style="padding-left: unset;"><h6>Sonntag</h6></div>
-						<?php 
-							if($sonntaggeschlossen == 'on'){
-								echo "<div class='col-sm-8 nomargin'><h6>geschlossen</h6><div>";
-							} else {
-								echo "" . "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" . $sonntagstart . " Uhr</h6></div>";
-								if($sonntagopenend == 'on'){
-									echo "<div class='col-sm-4 nomargin'><h6>openend</h6></div>";
-								} else {
-									echo "<div class='col-sm-4 nomargin' style='padding-left: unset;'><h6>" .  $sonntagende . " Uhr</h6></div>";
-								}
-									
-							}
-						?>
-					</div>
-				</li>
-		</ul>
-	</div>
+				</div>
+			</div>
+		</div>
 </div>
-	</div>
 </body>
 <script src="js/jquery-2.1.4.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->

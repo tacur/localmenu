@@ -74,13 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="collapse navbar-collapse" id="myNavbar">
-          <a class="nav-item nav-link" href="profile.php">Startseite</a>
-          <a class="nav-item nav-link" href="">QR-Code</a>
+          <a class="nav-item nav-link  " href="profile.php">Startseite</a>
+          <a class="nav-item nav-link " href="oeffnungszeiten.php">Öffnungszeiten</a>
+          <a class="nav-item nav-link " href="einstellungen.php">Einstellungen</a>
+          <a class="nav-item nav-link active" href="corona_liste.php">Corona-Einträge</a>
+          <!--<a class="nav-item nav-link" href="">QR-Code</a>
           <a class="nav-item nav-link" href="">Speisekarte</a>
-          <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
-          <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="">Druckauftrag</a>
-          <a class="nav-item nav-link   active" href="corona_liste.php">Corona-Einträge</a>
+          -->
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
             }
@@ -92,8 +93,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </div>
 </nav>
 
-<div id="snackbar"></div>
 
+<div id="snackbar"></div>
+<div class="cd-popup" id="cd-corona" role="alert">
+	<div class="cd-popup-container">
+      <p id="qrcode_success" style="max-width:unset;text-transform: uppercase;padding: 3em 0em 0em;">LocalMenu wird über den Abruf der 
+        Daten benachrichtigt. Bitte reiche deinen Nachweis zur Datenerhebung vom Gesundheitsamt nach.</p>
+        <p style="border: 1px solid;padding: 0em 2em;margin: 10px;"><input type="checkbox" class="form-check-input" id="coronaabholen">
+          <label class="form-check-label" for="coronaabholen">Ich wurde aufgefordert die Corona-Daten dem Gesundheitsamt zu melden.</label></p>
+          <p style="padding: 0em 2em;margin: 10px;color:red;" id="coronaabholenrot"></p>
+	   <ul class="cd-buttons" style="padding-inline-start: unset;">
+		  <li><a href="#0" onclick="hidePopup('corona','bestätigen')" id="download">Anfordern</a></li>
+		  <li><a href="#0" onclick="hidePopup('corona','schließen')">Abbrechen</a></li>
+	   </ul>
+	   <a href="#0" class="cd-popup-close img-replace" onclick="hidePopup('corona','schließen')"></a>
+  </div> <!-- cd-popup-container -->
+</div>
 <div class="container">
 <!-- NACHRICHT WEGEN VERIFIKATION DES ACCOUNTS -->
               <?php
@@ -111,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 <div class="container">
 <h3><u>Corona-Einträge (letzten 30 Tage):</u></h3>
 <div style="text-align:center;margin-bottom:10px;">
-  <button onclick='corona_absenden()' class='btn btn-success' style="width: 100%;" id="download" name='corona_daten_beauftragen'>Einträge anfordern</button>
+  <button onclick='corona_absenden()' class='btn btn-success' style="width: 100%;"  name='corona_daten_beauftragen'>Einträge anfordern</button>
 </div>
 <?php 
       if($result3->num_rows > 0){
@@ -184,9 +199,18 @@ $(document).ready(function() {
     } );
 } );
   function corona_absenden() {
-    if (event.srcElement.name == 'abbrechen'){
+    document.getElementById("cd-corona").style.visibility = "visible";
+    document.getElementById("cd-corona").style.opacity = 1;
+    
+  }
+
+  document.querySelector("#download").onclick = function () {
+  if(document.getElementById("coronaabholen").checked != 1) {
+      document.getElementById("coronaabholenrot").innerHTML = 'Bitte Datenerhebung bestätigen!';
+    } else {
+      document.getElementById("cd-corona").style.visibility = "hidden";
+      document.getElementById("cd-corona").style.opacity = 0;
       $.post("corona_absenden.php",{
-                  bestellung: event.srcElement.value
                 } , function(data,status) {  
                   // Get the snackbar DIV
                   var x = document.getElementById("snackbar");
@@ -197,11 +221,7 @@ $(document).ready(function() {
                   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                   test();
       }); 
-    }    
     
-  }
-  document.querySelector("#download").onclick = function () {
-  
   var pdf = new jsPDF("p", "mm", "a4");
   var img = new Image()
   img.src = 'img/logo.png'
@@ -253,6 +273,7 @@ $(document).ready(function() {
                   // After 3 seconds, remove the show class from DIV
                   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
                   test();
+  }
 }
 async function test() {
       await Sleep(3000); 
@@ -262,6 +283,19 @@ async function test() {
       return new Promise(resolve => setTimeout(resolve, milliseconds));
     }
 </script>
-
+<script>
+	function hidePopup(typ, event) { 
+			if(typ == 'corona') {
+				if (event == 'bestätigen') {
+					document.getElementById("cd-corona").style.visibility = "hidden";
+					document.getElementById("cd-corona").style.opacity = 0;
+				}
+				if (event == 'schließen') {
+					document.getElementById("cd-corona").style.visibility = "hidden";
+					document.getElementById("cd-corona").style.opacity = 0;
+				}
+			}
+	}
+</script>
 </body>
 </html>

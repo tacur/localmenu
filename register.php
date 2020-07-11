@@ -66,10 +66,18 @@ else { // Email doesn't already exist in a database, proceed...
 
         mail( $to, $subject, $message_body, $from );
         echo "Account mit der E-Mail: " . $email . " erfolgreich angelegt. Verifikations-Mail ist raus.";
-        
+        if (! isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $client_ip = $_SERVER['REMOTE_ADDR'];
+        }
+        else {
+            $client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        $Time = time() + (2*60*60);
+        $loggingtime = date('Y-m-d H:i:s', $Time);
         $kunde = $mysqli->query("SELECT * FROM users WHERE email='$email'");
         $kunde_erg = mysqli_fetch_assoc($kunde);
         $kunde_id = $kunde_erg['id'];
+        $kunde_name = $kunde_erg['name'];
         if ( $kunde_id != "") {
             $sql2 = "INSERT INTO `oeffnungszeiten` (`MONTAG_START`, `DIENSTAG_START`, `MITTWOCH_START`, `DONNERSTAG_START`, `FREITAG_START`, `SAMSTAG_START`, `SONNTAG_START`, 
                     `Kunden_ID`, 
@@ -82,12 +90,24 @@ else { // Email doesn't already exist in a database, proceed...
                     '00:00','00:00','00:00','00:00','00:00','00:00','00:00',
                     '','',
                     '','','','','','','','','','','','','','')";
+            $sql3 = "INSERT INTO Seitenaufrufe (Seitenaufruf_KUNDE,Seitenaufruf_WERT, id,Seitenaufruf_NAME) VALUES ('$kunde_id','0','','$kunde_name')";
+            $sql4 = "INSERT INTO protokoll (Protokoll_TYP, Protokoll_TEXT, Protokoll_ZEIT, Protokoll_USER, Protokoll_IP) " 
+			. "VALUES ('Seitenerstellung','Registrierung','$loggingtime', '$kunde_name', '$client_ip')";
             if ($mysqli->query($sql2)) {
                 echo "Öffnungszeiten erstellt";
             }else {
                 echo "Öffnungszeiten - SQL Statement Fehler";
             }
-            
+            if ($mysqli->query($sql3)) {
+                echo "Seitenaufruf erstellt";
+            }else {
+                echo "Seitenaufruf - SQL Statement Fehler";
+            }
+            if ($mysqli->query($sql4)) {
+                echo "Protokoll erstellt";
+            }else {
+                echo "Protokoll - SQL Statement Fehler";
+            }
             $_SESSION['message'] = "Account mit der E-Mail: " . $email . " erfolgreich angelegt. Verifikations-Mail ist raus.";
             header("location: profile.php");
         }else {

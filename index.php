@@ -88,6 +88,7 @@ if ($kunde_aktiv != 'on') {
 	<link id="pagestyle" rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 	<script src="js/easy.qrcode.min.js"></script>
+	<script data-ad-client="ca-pub-4646915547116269" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<title>LOCALMENU</title>
 </head>
 <body>
@@ -246,11 +247,11 @@ if ($kunde_aktiv != 'on') {
 	</div> <!-- .cd-folding-panel -->
 	<div class="cd-popup" id="cd-corona" role="alert">
 	<div class="cd-popup-container">
-			<p id="qrcode_success"></p>
+			<p id="qrcode_success" style="max-width:unset;text-transform: uppercase;"></p>
 			<input hidden id="qrcode_value">
-			<div class="qrcode" id="qrcode" style="margin-bottom: 10px;width: 90%;margin: auto;" value=""></div>
-		<ul class="cd-buttons"><a style="background: var(--grundfarbe);
-    margin: 20px;" href="#0" onclick="hidePopup('corona','plus')">Weiteren Besucher eintragen</a>
+			<div class="qrcode" id="qrcode" style="margin-bottom: 10px;width: 90%;margin: 16px;" value=""></div>
+		<ul class="cd-buttons"><a style="background: var(--third);
+			margin: 0 40px 20px 40px;border-radius: 5px;" href="#0" onclick="hidePopup('corona','plus')">Weiteren Besucher eintragen</a>
 	   </ul>
 		
 	   <ul class="cd-buttons">
@@ -278,7 +279,7 @@ if ($kunde_aktiv != 'on') {
 			<div class="bg-contact100" style="background-color: unset;">
 				<div class="container-contact100">
 					<div class="wrap-contact100">
-						<div class="contact100-pic js-tilt" data-tilt>
+						<div class="contact100-pic js-tilt" data-tilt style="background: url(img/corona_icon.png) center center no-repeat;">
 						</div>
 						<form class="contact100-form validate-form" id="corona" enctype="multipart/form-data" method="post">		
 							<div class="wrap-input100 validate-input" data-validate = "Vorname muss ausgefüllt werden">
@@ -320,7 +321,7 @@ if ($kunde_aktiv != 'on') {
 							</div>
 							
 							<div class="wrap-input100 validate-input" data-validate = "Die vor. Aufenthaltsdauer Ihres Besuches muss eingetragen werden.">
-								<input class="input100" type="text" name="dauer" placeholder="Vor. Aufenthaltsdauer" required>
+								<input class="input100" type="number" name="dauer" placeholder="Aufenthalt in Stunden" required>
 								<span class="focus-input100"></span>
 								<span class="symbol-input100">
 									<i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -394,6 +395,16 @@ if ($speisekarte_direkt != ""){
 			else {console.log("Darkmode wurde in der Vergangenheit nicht gesetzt");}
 			 
 	}); 
+	// ##### Seitenaufruf ######
+	$(document).ready(function(){
+			var aufruf = 1;
+			$.post("cookie.php", {
+									seitenaufruf: aufruf
+							}, function(data, status){
+								console.log("Seitenaufruf");
+							}
+			)
+	});
 	function swapStyleSheet(sheet){
 			// document.getElementById('pagestyle').setAttribute('href', sheet);
 			if (document.getElementById('darkmode').value == null) {
@@ -481,11 +492,11 @@ frm.submit(function(e) {
 							document.getElementById("qrcode_success").innerHTML = "Bitte zeige der Bedienung die folgenden Daten:";
 							data_start.split("%").forEach(function (item) {
 								if (item != ""){
-									document.getElementById("qrcode").innerHTML += "<h1 style='margin-bottom: 5px;background: var(--grundfarbe);color:var(--secondary);padding: 10px;'>" + item  + "</h1>";
+									document.getElementById("qrcode").innerHTML += "<h1 style='padding: 10px;'><b>" + item  + "</b></h1>";
 								}
 								
 							});
-							document.getElementById("qrcode").innerHTML += "<h1 style='margin-bottom: 5px;background: var(--grundfarbe);color:var(--secondary);padding: 10px;'>" + data_neu  + "</h1>";;
+							document.getElementById("qrcode").innerHTML += "<h1 style='padding: 10px;'><b>" + data_neu  + "</b></h1>";;
 							$("#qrcode_value").val(data_start + "%" + data_neu);
 							/*
 							var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -553,6 +564,11 @@ frm.submit(function(e) {
 				}
 			}
 	}
+</script>
+<script type="text/javascript">
+  function frameload(){
+	document.getElementById('loading').style.display = 'none';
+  }
 </script>
 </body>
 </html>

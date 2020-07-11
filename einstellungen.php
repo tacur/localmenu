@@ -77,13 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="collapse navbar-collapse" id="myNavbar">
-          <a class="nav-item nav-link" href="profile.php">Startseite</a>
-          <a class="nav-item nav-link" href="">QR-Code</a>
-          <a class="nav-item nav-link" href="">Speisekarte</a>
+          <a class="nav-item nav-link  " href="profile.php">Startseite</a>
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
-          <a class="nav-item nav-link   active" href="einstellungen.php">Einstellungen</a>
-          <a class="nav-item nav-link" href="">Druckauftrag</a>
+          <a class="nav-item nav-link active" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="corona_liste.php">Corona-Einträge</a>
+          <!--<a class="nav-item nav-link" href="">QR-Code</a>
+          <a class="nav-item nav-link" href="">Speisekarte</a>
+          <a class="nav-item nav-link" href="">Druckauftrag</a>
+          -->
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
             }

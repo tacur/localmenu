@@ -15,21 +15,26 @@ $telefonnummer = $_SESSION['telefonnummer'];
     // Add user to the database
     if ( $mysqli->query($sql) ){
 
-        $to      = $email;
-        $subject = 'Datenanfrage Coronafall (LOCALMENU)';
+        $to      ="info@localmenu.de";
+        $subject = 'Datenanforderung Corona von '. $name;
         $from = "From: LOCALMENU <info@localmenu.de>";
-        $message_body = '
-        Sehr geehrte Damen und Herren,
+        $message_body = 'Sehr geehrte Damen und Herren,
 
-        wie angefordert erhalten Sie die notwendigen Informationen für den gemeldeten Corona-Fall für unseren registrierten Kunden ' .
-        $vorname . ' '. $nachname . ' von der Lokalität '. $name .' als Anhang im PDF-Format. 
-        Bei weiteren Fragen wenden Sie sich per E-Mail an: ' . . ' oder per Telefonnumer an: ' . $telefonnummer . '
+wie angefordert erhalten Sie die notwendigen Informationen für den gemeldeten Corona-Fall für unseren registrierten Kunden ' .
+$vorname . ' '. $nachname . ' von der Lokalität '. $name .' als Anhang im PDF-Format. 
+Bei weiteren Fragen wenden Sie sich per E-Mail an: ' . $email . ' oder per Telefonnumer an: ' . $telefonnummer . '
         
-        Mit freundlichen Grüßen
+Mit freundlichen Grüßen
         
-        i. A. Team LocalMenu';
+i. A. Team LocalMenu';
 
-        mail( $to, $subject, $message_body, $from );
+        $headers   = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/plain; charset=utf-8";
+        $headers[] = "From: LOCALMENU <info@localmenu.de>";
+        $headers[] = "Subject: {$betreff}";
+
+        mail( $to, $subject, $message_body, implode("\r\n",$headers) );
         echo "Daten erfolgreich abgesendet.";
        
     }

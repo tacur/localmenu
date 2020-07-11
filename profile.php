@@ -73,12 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </button>
     <div class="collapse navbar-collapse" id="myNavbar">
           <a class="nav-item nav-link  active" href="profile.php">Startseite</a>
-          <a class="nav-item nav-link" href="">QR-Code</a>
-          <a class="nav-item nav-link" href="">Speisekarte</a>
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
           <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
-          <a class="nav-item nav-link" href="">Druckauftrag</a>
           <a class="nav-item nav-link" href="corona_liste.php">Corona-Einträge</a>
+          <!--<a class="nav-item nav-link" href="">QR-Code</a>
+          <a class="nav-item nav-link" href="">Speisekarte</a>
+          <a class="nav-item nav-link" href="">Druckauftrag</a>
+          -->
           <?php if ($administrator == '1315'){
           echo '<a class="nav-item nav-link" href="kundenmanagement.php">Kundenmanagement</a>';
             }
@@ -149,6 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border: unset;">
     <div class="card-header">Speisekarte</div>
     <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Dateigröße unter	5	MB empfohlen.	Komprimieren	Sie	Ihre	Datei	und	Fragen	Sie	bei	uns	nach.</h6>
       <div class="custom-file">
       <form class="was-validated" id="speisekarte" enctype="multipart/form-data" method="post">
         <div class="form-row">
@@ -163,15 +165,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <h3>Aktuelle Speisekarte</h3>
         <?php 
                 if ($speisekarte == "1"){
-                  echo '<iframe src="Kunden/'. $kundeid.'/speisekarte/speisekarte.pdf" width="100%" height="500px"> </iframe>';
+                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/Kunden/'. $result_id.'/speisekarte/speisekarte.pdf" width="100%" height="500px"> </iframe>';
                 }else{
-                  echo '<iframe src="dateien/speisekarte.pdf" width="100%" height="500px"> </iframe>';
+                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width="100%" height="500px"> </iframe>';
                 }
         ?>
         <br>
         <?php 
                 if ($speisekarte == "1"){
-                  echo '<a class="btn btn-primary" href="Kunden/'. $kundeid.'/speisekarte/speisekarte.pdf" download>Speisekarte herunterladen</a>';
+                  echo '<a class="btn btn-primary" href="Kunden/'. $result_id.'/speisekarte/speisekarte.pdf" download>Speisekarte herunterladen</a>';
                 }else{
                   echo '<a class="btn btn-primary" href="Kunden/speisekarte/speisekarte.pdf" download>Speisekarte herunterladen</a>';
                 }
@@ -255,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             preview: '.img-preview'
         });
     });
-    
+  // QR-Code Generator
 	$(document).ready(function(){ 
 	 	var id = document.getElementById("kundenid").value;
 		 if (id) {
@@ -263,7 +265,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		 }
 		 var qrcode = new QRCode(document.getElementById("qrcode"), {
 			text: "https://localmenu.de/?kunde=<?php echo $result_id; ?>",
-			logo: "img/qrcode_logo.png",
+      logo: "img/qrcode_logo.png",
+      PO: '#000000',
+      PI: '#209850',
 			logoWidth: undefined,
 			logoHeight: undefined,
 			logoBackgroundColor: '#ffffff',
@@ -271,18 +275,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		});
   });
 
+  //PDF Generator
   document.querySelector("#download").onclick = function () {
-  
   var img = new Image();
   img.src = $("#qrcode");
   var pdf = new jsPDF("p", "mm", "a4");
   var canvas = document.getElementsByTagName("canvas");
   var imgSrc = canvas[0].toDataURL("image/png");
   pdf.text ("Dein QR-Code zum Ausschneiden", 20, 30);
+  pdf.text ("Wetterfeste Sticker? Individuelles Logo? Sprechen Sie uns an!", 20, 35);
   pdf.setProperties({
     title: 'PDF mit QR-Code erstellen',
     subject: 'PDF mit Javascript erstellt',
-    author: 'Tarkan Acur',
+    author: 'LocalMenu',
     keywords: 'generated, javascript,jspdf',
     creator: 'Javascript jsPDF'
   });
@@ -298,6 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   pdf.addImage(imgSrc, 'png', 140, 100, 50, 50);
   pdf.addImage(imgSrc, 'png', 140, 160, 50, 50);
   pdf.addImage(imgSrc, 'png', 140, 220, 50, 50);
+  pdf.text ("www.localmenu.de", 80, 280);
   pdf.save ("qrcode.pdf");
 }
 /*

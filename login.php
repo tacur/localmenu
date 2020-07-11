@@ -157,6 +157,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 					<span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
 					<input id="postleitzahl_register" type="text" class="form-control" name="postleitzahl" placeholder="Postleitzahl" required>
 			</div>
+			<div class="input-group">
+					<input type="checkbox" name="agbs" required> Ich akzeptiere die <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank"> AGBs</a>
+			</div>
 			<br><button type="submit" class="btn btn-info" name="register">Registrieren</button>
  		</form>
       </div>
