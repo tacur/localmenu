@@ -177,7 +177,6 @@ if ($kunde_id == ""){
 				$.post("kundensuche.php", {
 					datainput : input
 				}, function(data, status){
-					alert(data);
 					if (data.length >= 10){
 						var list = new Array();
 						var kunde = new Array();
