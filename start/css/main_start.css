@@ -1,0 +1,232 @@
+@import "https://fonts.googleapis.com/css?family=Catamaran";
+:root {
+  /* --grundfarbe: #92D050; */
+  /* --grundfarbe: #78A45A;*/
+  --grundfarbe: #209850;
+  /*--secondary: #363558;  */
+  --secondary: #ffffff; 
+  /* --secondary: rgb(35, 31, 32); */
+  /*--third: linear-gradient( rgb(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)) no-repeat center center;*/
+  --third: #231F20;
+  --grau: #231F20;
+  --hellgrau: #343a40!important;
+  --schrift: "Unica One", Arial, Helvetica, sans-serif;
+  --schatten: black;
+  --feuerschatten: 0 0 20px #fefcc9, 10px -10px 30px #feec85,-20px -20px 40px #ffae34,20px -40px 50px #ec760c,-20px -60px 60px #cd4606, 0 -80px 70px #973716,
+    10px -90px 80px #451b0e;
+}
+*, *::after, *::before {
+  box-sizing: unset;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Vollkorn", serif;
+}
+
+body {
+  --height: 50;
+  --width: 300;
+  --border: 5;
+  --speed: 0.4;
+  --ease: cubic-bezier(0.85, 0.01, 0.4, 0.97);
+  --color-bk: var(--grundfarbe);
+  background: var(--color-bk);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-transition-property: background;
+  transition-property: background;
+  -webkit-transition-duration: calc(var(--speed) * 1s);
+          transition-duration: calc(var(--speed) * 1s);
+  -webkit-transition-timing-function: var(--ease);
+          transition-timing-function: var(--ease);
+}
+body:focus-within {
+  --speed: 0.7;
+  background-color: var(--grundfarbe);
+}
+
+::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input-container {
+  width: calc(var(--width) * 1px);
+  height: calc(var(--height) * 1px);
+  position: relative;
+  cursor: pointer;
+  -webkit-transform: rotate(12deg) scale(0.7);
+          transform: rotate(12deg) scale(0.7);
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+  -webkit-transition-duration: calc(var(--speed) * 1s);
+          transition-duration: calc(var(--speed) * 1s);
+  -webkit-transition-timing-function: var(--ease);
+          transition-timing-function: var(--ease);
+}
+.input-container .center {
+  border: calc(var(--border) * 1px) solid black;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  height: calc(100% - var(--border) * 2px);
+  -webkit-transform: scalex(0);
+          transform: scalex(0);
+  -webkit-transition: inherit;
+  transition: inherit;
+  background-color: var(--color-bk);
+}
+.input-container input {
+  -webkit-transition: inherit;
+  transition: inherit;
+  width: calc(100% - var(--height));
+  height: 100%;
+  border: 0;
+  outline: 0;
+  color: white;
+  background: transparent;
+  font-size: 1.3rem;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+.input-container .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 2em;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: inherit;
+  transition: inherit;
+  -webkit-transform: scalex(0) translateY(-10px);
+          transform: scalex(0) translateY(-10px);
+  opacity: 0;
+}
+.input-container:after, .input-container:before {
+  z-index: 1;
+  content: "";
+  -webkit-transition: inherit;
+  transition: inherit;
+  width: calc((var(--height) * 0.5px) - (var(--border) * 1px));
+  height: calc((var(--height) * 1px) - (var(--border) * 2px));
+  display: block;
+  top: 0;
+  border-color: white;
+  position: absolute;
+  background-color: var(--color-bk);
+  border: calc(var(--border) * 1px) solid black;
+}
+.input-container:before {
+  right: 100%;
+  border-radius: 2em 0 0 2em;
+  border-right: none;
+  -webkit-transform: translateX(calc(var(--width) * 0.5px));
+          transform: translateX(calc(var(--width) * 0.5px));
+}
+.input-container:after {
+  left: 100%;
+  border-radius: 0 2em 2em 0;
+  border-left: none;
+  -webkit-transform: translateX(calc(var(--width) * -0.5px));
+          transform: translateX(calc(var(--width) * -0.5px));
+}
+.input-container .sticks {
+  position: absolute;
+  height: calc(var(--height) * 0.5px);
+  width: 1px;
+  bottom: 0;
+  right: 0;
+  -webkit-transition: inherit;
+  transition: inherit;
+  -webkit-transition-duration: calc(var(--speed) * 1.25s);
+          transition-duration: calc(var(--speed) * 1.25s);
+  -webkit-transform: translateX(calc((var(--width) - var(--height)) * -0.53px)) rotate(-45deg);
+          transform: translateX(calc((var(--width) - var(--height)) * -0.53px)) rotate(-45deg);
+  z-index: 2;
+}
+.input-container .sticks:before, .input-container .sticks:after {
+  -webkit-transition: -webkit-transform calc(var(--speed) * 1s) var(--ease);
+  transition: -webkit-transform calc(var(--speed) * 1s) var(--ease);
+  transition: transform calc(var(--speed) * 1s) var(--ease);
+  transition: transform calc(var(--speed) * 1s) var(--ease), -webkit-transform calc(var(--speed) * 1s) var(--ease);
+  height: calc(var(--height) * 0.5px);
+  width: calc(var(--border) * 1px);
+  position: absolute;
+  content: "";
+  background-color: black;
+  left: calc(var(--border) * -0.5px);
+  bottom: calc(var(--height) * -0.25px);
+}
+.input-container:focus-within {
+  -webkit-transform: rotate(0deg) translatey(-10px);
+          transform: rotate(0deg) translatey(-10px);
+}
+.input-container:focus-within .center {
+  -webkit-transform: scalex(1);
+          transform: scalex(1);
+}
+.input-container:focus-within .shadow {
+  -webkit-transform: scalex(1) translateY(0px);
+          transform: scalex(1) translateY(0px);
+  opacity: 1;
+}
+.input-container:focus-within input {
+  opacity: 1;
+}
+.input-container:focus-within:before {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+.input-container:focus-within:after {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+.input-container:focus-within .sticks {
+  -webkit-transition-duration: calc(var(--speed) * 1s);
+          transition-duration: calc(var(--speed) * 1s);
+  -webkit-transform: translateX(calc(var(--height) * -0.1px)) translateY(0) rotate(180deg);
+          transform: translateX(calc(var(--height) * -0.1px)) translateY(0) rotate(180deg);
+}
+.input-container:focus-within .sticks:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.input-container:focus-within .sticks:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}

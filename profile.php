@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   </button>
     <div class="collapse navbar-collapse" id="myNavbar">
           <a class="nav-item nav-link  active" href="profile.php">Startseite</a>
+          <a class="nav-item nav-link" href="tagesmenu.php">Tagesmenu</a>
           <a class="nav-item nav-link" href="oeffnungszeiten.php">Öffnungszeiten</a>
           <a class="nav-item nav-link" href="einstellungen.php">Einstellungen</a>
           <a class="nav-item nav-link" href="corona_liste.php">Corona-Einträge</a>

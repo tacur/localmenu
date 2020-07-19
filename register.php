@@ -30,7 +30,8 @@ $postleitzahl = $mysqli->escape_string($_POST['postleitzahl']);
 $password = $mysqli->escape_string(password_hash($_POST['password'], PASSWORD_BCRYPT));
 //$password = password_hash($_POST['password_reg'], PASSWORD_BCRYPT);
 $hash = $mysqli->escape_string( md5( rand(0,1000) ) );
-
+$Time = time() + (2*60*60);
+$loggingtime = date('Y-m-d H:i:s', $Time);
 // Check if user with that email already exists
 $result = $mysqli->query("SELECT * FROM users WHERE email='$email'") or die($mysqli->error());
 // We know user email exists if the rows returned are more than 0
@@ -43,8 +44,8 @@ else { // Email doesn't already exist in a database, proceed...
     // active is 0 by DEFAULT (no need to include it here)
     // $sql = "INSERT INTO users (first_name, last_name, email, studiengang, telefonnummer, verantwortlicher, password, hash) " 
     //       . "VALUES ('$first_name','$last_name','$email','$studiengang','$telefonnummer','$verantwortlicher','$password', '$hash')";
-    $sql = "INSERT INTO users (name, profilbild, speisekarte,speisekarte_direkt, first_name, last_name, email, active, telefonnummer, password, hash, strasse, hausnummer, ort, postleitzahl) " 
-            . "VALUES ('$name','0','0','on','$first_name','$last_name','$email','1','$telefonnummer','$password', '$hash', '$strasse', '$hausnummer', '$ort', '$postleitzahl')";
+    $sql = "INSERT INTO users (name, profilbild, speisekarte,speisekarte_direkt, first_name, last_name, email, active, telefonnummer, password, hash, strasse, hausnummer, ort, postleitzahl, erstelldatum) " 
+            . "VALUES ('$name','0','0','on','$first_name','$last_name','$email','1','$telefonnummer','$password', '$hash', '$strasse', '$hausnummer', '$ort', '$postleitzahl','$loggingtime')";
     
     // Add user to the database
     if ( $mysqli->query($sql) ){
@@ -72,8 +73,6 @@ else { // Email doesn't already exist in a database, proceed...
         else {
             $client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
-        $Time = time() + (2*60*60);
-        $loggingtime = date('Y-m-d H:i:s', $Time);
         $kunde = $mysqli->query("SELECT * FROM users WHERE email='$email'");
         $kunde_erg = mysqli_fetch_assoc($kunde);
         $kunde_id = $kunde_erg['id'];
@@ -92,7 +91,9 @@ else { // Email doesn't already exist in a database, proceed...
                     '','','','','','','','','','','','','','')";
             $sql3 = "INSERT INTO Seitenaufrufe (Seitenaufruf_KUNDE,Seitenaufruf_WERT, id,Seitenaufruf_NAME) VALUES ('$kunde_id','0','','$kunde_name')";
             $sql4 = "INSERT INTO protokoll (Protokoll_TYP, Protokoll_TEXT, Protokoll_ZEIT, Protokoll_USER, Protokoll_IP) " 
-			. "VALUES ('Seitenerstellung','Registrierung','$loggingtime', '$kunde_name', '$client_ip')";
+            . "VALUES ('Seitenerstellung','Registrierung','$loggingtime', '$kunde_name', '$client_ip')";
+            $sql5 = "INSERT INTO Tagesmenu (id,Kunden_ID, tagesmenu_NAME, tagesmenu_AUSWAHL, tagesmenu_PFAD, tagesmenu_AKTIV, tagesmenu_UPDATE) " 
+			. "VALUES ('','$kunde_id','Tagesmenu','Alletage','0', 'on', '$loggingtime')";
             if ($mysqli->query($sql2)) {
                 echo "Öffnungszeiten erstellt";
             }else {
@@ -107,6 +108,11 @@ else { // Email doesn't already exist in a database, proceed...
                 echo "Protokoll erstellt";
             }else {
                 echo "Protokoll - SQL Statement Fehler";
+            }
+            if ($mysqli->query($sql5)) {
+                echo "Tagesmenu erstellt";
+            }else {
+                echo "Tagesmenu - SQL Statement Fehler";
             }
             $_SESSION['message'] = "Account mit der E-Mail: " . $email . " erfolgreich angelegt. Verifikations-Mail ist raus.";
             header("location: profile.php");

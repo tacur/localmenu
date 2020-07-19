@@ -17,7 +17,7 @@ $profilbild= $kunde_erg['profilbild'];
 
 if ($kunde_id == ""){
 	$kunde_id = "X";
-	header("Location: https://localmenu.de/info");
+	header("Location: https://dev.localmenu.de/start");
 } else {
 	if (! isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 		$client_ip = $_SERVER['REMOTE_ADDR'];
@@ -30,31 +30,8 @@ if ($kunde_id == ""){
 	$sql2 = "INSERT INTO protokoll (Protokoll_TYP, Protokoll_TEXT, Protokoll_ZEIT, Protokoll_USER, Protokoll_IP) " 
 			. "VALUES ('Seitenaufruf','QR-Code oder Direktaufruf','$loggingtime', '$kunde_name', '$client_ip')";
 	$result_logging = $mysqli->query($sql2);	
-	if ($speisekarte_direkt != ""){
-		// echo "<input id='speisekarte_direktaufruf' value='1' hidden>";
-		// header("Location: http://www.localmenu.de/Kunden/" . $kundenid . "/speisekarte/speisekarte.pdf");
-		/*echo "<script> 	$(document).ready(function(){   
-			document.getElementById('speisekarte_direkt').click();
-		});
-		</script>";
-		*/
-	
-	}
 }
 
-
-//echo "ID: " . $kunde_id;
-//echo "Vorname: " . $kunde_name;
-//$kunde_aktiv = utf8_encode($subdomain_kunde_erg['active']);
-/*
-if ($kunde_aktiv != 'on') {
-	echo '
-		<script> 
-			document.location.href="http://www.qrmenu.memento-grill.de/error.php"; 
-		</script>';
-}
-*/
-// echo $kunde_id;
  $_SESSION['kunde_id'] = $kunde_id;
 
 ?>
@@ -133,10 +110,25 @@ if ($kunde_aktiv != 'on') {
 									<li class="cd-item" >
 										<a href="item-1.php/?kunde=<?php echo $kunde_id;?>" id="speisekarte_direkt">
 											<div>
-												
 												<img src="img/menu_icon.png" class="cd-item-logo" />
 												<br>
 												<h2 >Speisekarte</h2>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>	
+					</div>
+					<div class="col-sm-6" style="padding-bottom: 5px;">
+							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
+							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
+								<ul class="cd-gallery">
+									<li class="cd-item" >
+										<a href="item-5.php/?kunde=<?php echo $kunde_id;?>">
+											<div>
+												<img src="img/tagesmenu_icon.png" class="cd-item-logo" />
+												<br>
+												<h2 >Tagesmenu</h2>
 											</div>
 										</a>
 									</li>
@@ -151,27 +143,9 @@ if ($kunde_aktiv != 'on') {
 									<li class="cd-item">		
 									<a href="item-2.php/?kunde=<?php echo $kunde_id;?>" >
 											<div>
-												
-												<img src="img/uhrzeit_icon.png" class="cd-item-logo" />
+												<img src="img/uhrzeit_icon_neu.png" class="cd-item-logo" />
 												<br>
-												<h2 >Öffnungszeiten</h2>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>	
-					</div>		
-					<div class="col-sm-6" style="padding-bottom: 5px;">
-							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
-							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
-								<ul class="cd-gallery" >
-									<li class="cd-item" >
-										<a href="item-3.php/?kunde=<?php echo $kunde_id;?>" >
-											<div>
-												
-												<img src="img/telefon_icon.png" class="cd-item-logo"  />
-												<br>
-												<h2 >Kontakt</h2>
+												<h2 >Kontakt/Öffnungszeiten</h2>
 											</div>
 										</a>
 									</li>
@@ -373,8 +347,6 @@ if ($kunde_aktiv != 'on') {
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <?php 
 if ($speisekarte_direkt != ""){
-		// echo "<input id='speisekarte_direktaufruf' value='1' hidden>";
-		// header("Location: http://www.localmenu.de/Kunden/" . $kundenid . "/speisekarte/speisekarte.pdf");
 		echo "<script> 	$(document).ready(function(){   
 			document.getElementById('speisekarte_direkt').click();
 		});
@@ -568,7 +540,9 @@ frm.submit(function(e) {
 <script type="text/javascript">
   function frameload(){
 	document.getElementById('loading').style.display = 'none';
+	document.getElementById('loading2').style.display = 'none';
   }
+
 </script>
 </body>
 </html>

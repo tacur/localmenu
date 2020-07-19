@@ -1,0 +1,253 @@
+:root {
+  /* --grundfarbe: #92D050; */
+  /* --grundfarbe: #78A45A;*/
+  --grundfarbe: #209850;
+  /*--secondary: #363558;  */
+  --secondary: #333333; 
+  /* --secondary: rgb(35, 31, 32); */
+  /*--third: linear-gradient( rgb(255, 255, 255, 0.9),rgba(255, 255, 255, 0.9)) no-repeat center center;*/
+  --third: #cccccc;
+  --grau: #231F20;
+  --hellgrau: #343a40!important;
+  --schrift: "Unica One", Arial, Helvetica, sans-serif;
+  --schatten: black;
+  --feuerschatten: 0 0 20px #fefcc9, 10px -10px 30px #feec85,-20px -20px 40px #ffae34,20px -40px 50px #ec760c,-20px -60px 60px #cd4606, 0 -80px 70px #973716,
+    10px -90px 80px #451b0e;
+}
+
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+a.nav-link.nav-item{
+  color: var(--grundfarbe)!important;
+}
+a.nav-link.active{
+  background: var(--grundfarbe)!important;
+    color: white!important;
+}
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+.well{
+  background-color: rgb(52, 58, 64, 0.3);
+}
+.image1 {
+  border: 1px solid #ddd; 
+  border-radius: 4px;  
+  padding: 5px; 
+   margin-right: 10px; 
+  width: 100px;
+}
+.image2 {
+
+max-height: 160px;
+}
+.image3 {
+max-height: 50px;
+}
+
+.div_fahrten{
+  /* border: 1px solid var(--grundfarbe);*/
+    color: white;
+    background: var(--hellgrau);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    margin:10px
+}
+
+.headshot {
+	flex-shrink: 0;
+  margin: auto;
+  display: block;
+	height: 200px;
+	width: 200px;
+	border: calc(8px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	background-size: cover;
+	box-sizing: border-box;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 30%;
+  background-image: linear-gradient(to bottom right, #363558, #544173, #65d29b);
+}
+.img-preview{
+
+    overflow: hidden;
+}
+
+/* -------------------------------- 
+xpopup 
+-------------------------------- */
+.cd-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(94, 110, 141, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 5;
+  -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+.cd-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+  -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.cd-popup-container {
+  position: relative;
+  top: 0;
+  width: 90%;
+  max-width: 400px;
+  margin: 4em auto;
+  background: #FFF;
+  border-radius: .25em .25em .4em .4em;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(-40px);
+  -moz-transform: translateY(-40px);
+  -ms-transform: translateY(-40px);
+  -o-transform: translateY(-40px);
+  transform: translateY(-40px);
+  /* Force Hardware Acceleration in WebKit */
+  -webkit-backface-visibility: hidden;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.cd-popup-container p {
+  color: var(--grundfarbe);
+  font-size: medium;
+  padding: 3em 2em;
+}
+.cd-buttons{
+  padding-inline-start: unset;
+}
+.cd-popup-container .cd-buttons:after {
+  content: "";
+  display: table;
+  clear: both;
+  
+}
+.cd-popup-container .cd-buttons li {
+  float: left;
+  width: 50%;
+  list-style-type: none;
+}
+.cd-popup-container .cd-buttons a {
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  text-transform: uppercase;
+  color: #FFF;
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.cd-popup-container .cd-buttons li:first-child a {
+  background: var(--grundfarbe); /* #fc7169; */
+  border-radius: 0 0 0 .25em;
+}
+.no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
+  background-color: #c5ccd8;
+}
+.cd-popup-container .cd-buttons li:last-child a {
+  background: var(--hellgrau); /* #b6bece; */
+  border-radius: 0 0 .25em 0;
+}
+.no-touch .cd-popup-container .cd-buttons li:last-child a:hover {
+  background-color: #c5ccd8;
+}
+.cd-popup-container .cd-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+}
+.cd-popup-container .cd-popup-close::before, .cd-popup-container .cd-popup-close::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 14px;
+  height: 3px;
+  background-color: var(--grundfarbe);
+}
+.cd-popup-container .cd-popup-close::before {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  left: 8px;
+}
+.cd-popup-container .cd-popup-close::after {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: 8px;
+}
+.is-visible .cd-popup-container {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+@media only screen and (min-width: 1170px) {
+  .cd-popup-container {
+    margin: 8em auto;
+  }
+}
