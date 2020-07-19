@@ -3,17 +3,19 @@ require 'db.php';
 session_start();
 
 $input = $mysqli->escape_string($_POST['datainput']);
-
+$query = "SELECT * FROM users WHERE postleitzahl LIKE '%$input%' OR name LIKE '%$input%' OR ort LIKE '%$input%'";
 $result = $mysqli->query("SELECT * FROM users WHERE postleitzahl LIKE '%$input%' OR name LIKE '%$input%' OR ort LIKE '%$input%'");
+// echo $query;
 if($result->num_rows > 0){
     while ( $row = $result->fetch_assoc() ) {
-        $kundendaten = mysqli_fetch_assoc($result);
-        $kundename = $kundendaten['name'];
-        $kundestr = $kundendaten['strasse'];
-        $kundenummer = $kundendaten['hausnummer'];
-        $kundeplz = $kundendaten['postleitzahl'];
-        $kundeort = $kundendaten['ort'];
-        $kundenid = $kundendaten['id'];
+        
+        $kundename = $row['name'];
+        $kundestr = $row['strasse'];
+        $kundenummer = $row['hausnummer'];
+        $kundeplz = $row['postleitzahl'];
+        $kundeort = $row['ort'];
+        $kundenid = $row['id'];
+        
         echo $kundename; 
         echo ",";
         echo $kundestr; 

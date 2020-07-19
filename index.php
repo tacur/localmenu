@@ -15,6 +15,10 @@ $kunde_plz = utf8_encode($kunde_erg['postleitzahl']);
 $speisekarte_direkt= $kunde_erg['speisekarte_direkt'];
 $profilbild= $kunde_erg['profilbild'];
 
+$result_tagesmenu = $mysqli->query("SELECT * FROM Tagesmenu WHERE Kunden_ID='$kundenid'");
+$result_TM = mysqli_fetch_assoc($result_tagesmenu);
+$result_TM_Pfad = $result_TM['tagesmenu_PFAD'];
+
 if ($kunde_id == ""){
 	$kunde_id = "X";
 	header("Location: https://dev.localmenu.de/start");
@@ -119,14 +123,16 @@ if ($kunde_id == ""){
 								</ul>
 							</div>	
 					</div>
-					<div class="col-sm-6" style="padding-bottom: 5px;">
-							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
-							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
-								<ul class="cd-gallery">
-									<li class="cd-item" >
-										<a href="item-5.php/?kunde=<?php echo $kunde_id;?>">
+			<?php
+				if (strlen($result_TM_Pfad) > 5 ) {
+					echo "<div class='col-sm-6' style='padding-bottom: 5px;'>
+							<div class='card bg-dark' style='overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
+								box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;'>
+								<ul class='cd-gallery'>
+									<li class='cd-item' >
+										<a href='item-5.php/?kunde=" .  $kunde_id . "'>
 											<div>
-												<img src="img/tagesmenu_icon.png" class="cd-item-logo" />
+												<img src='img/tagesmenu_icon.png' class='cd-item-logo' />
 												<br>
 												<h2 >Tagesmenu</h2>
 											</div>
@@ -134,7 +140,10 @@ if ($kunde_id == ""){
 									</li>
 								</ul>
 							</div>	
-					</div>		
+						</div>";
+				}
+					
+			?>	
 					<div class="col-sm-6" style="padding-bottom: 5px;">
 							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
 							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
@@ -539,10 +548,12 @@ frm.submit(function(e) {
 </script>
 <script type="text/javascript">
   function frameload(){
-	document.getElementById('loading').style.display = 'none';
-	document.getElementById('loading2').style.display = 'none';
+	  if(document.getElementById('loading')) {
+		document.getElementById('loading').style.display = 'none';
+	  }else {
+		document.getElementById('loading2').style.display = 'none';
+	  }
   }
-
 </script>
 </body>
 </html>

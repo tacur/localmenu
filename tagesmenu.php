@@ -12,6 +12,10 @@ $result1 = mysqli_fetch_assoc($result);
 $result_id = $result1['id'];
 $profilbild = $result1['profilbild'];
 $tagesmenu = $result1['tagesmenu'];
+
+$result_tagesmenu = $mysqli->query("SELECT * FROM Tagesmenu WHERE Kunden_ID='$result_id'");
+$result_TM = mysqli_fetch_assoc($result_tagesmenu);
+$result_TM_Pfad = $result_TM['tagesmenu_PFAD'];
 ?>
 
 <?php
@@ -109,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
               
 </div>
 <div class="container">
+<!--
 <div class="card text-white bg-dark mb-3" style="overflow: hidden;min-width: 100%;border-radius: 2rem;background: var(--secondary);
   box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border: unset;">
     <div class="card-header">Tagesmenu Tagesauswahl</div>
@@ -137,11 +142,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </div>
         <br>
         <button class="btn btn-primary" type="submit">Einstellungen speichern</button>
-      </form> 
-      <br>
-      <!--<button type="button" id="download_speisekarte" class="btn btn-primary btn-lg btn-block">Speisekarte herunterladen</button>--></p>
+      </form>       
   </div>
 </div>
+-->
   <div class="card text-white bg-dark mb-3" style="overflow: hidden;min-width: 100%;border-radius: 2rem;background: var(--secondary);
   box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border: unset;">
     <div class="card-header">Tagesmenu</div>
@@ -161,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <h3>Aktuelles Tagesmenu</h3>
         <?php 
                 if ($tagesmenu == "1"){
-                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/Kunden/'. $result_id.'/tagesmenu/tagesmenu.pdf" width="100%" height="500px"> </iframe>';
+                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/'. $result_TM_Pfad.'" width="100%" height="500px"> </iframe>';
                 }else{
                   echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/dateien/tagesmenu.pdf" width="100%" height="500px"> </iframe>';
                 }
@@ -169,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <br>
         <?php 
                 if ($tagesmenu == "1"){
-                  echo '<a class="btn btn-primary" href="Kunden/'. $result_id.'/tagesmenu/tagesmenu.pdf" download>Tagesmenu herunterladen</a>';
+                  echo '<a class="btn btn-primary" href="'. $result_TM_Pfad.'" download>Tagesmenu herunterladen</a>';
                 }else{
                   echo '<a class="btn btn-primary" href="Kunden/tagesmenu/tagesmenu.pdf" download>Tagesmenu herunterladen</a>';
                 }

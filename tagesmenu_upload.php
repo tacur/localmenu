@@ -18,7 +18,7 @@ if ( ! in_array( $_FILES['artikelbild']['type'] , $zugelassenedateitypen ))
           echo "<p>Dateitype ist NICHT zugelassen</p>";
 } else {
 */
-        $uploaddir = "Kunden/" . $result_id . "/" . "tagesmenu/" . "/";
+        $uploaddir = "Kunden/" . $result_id . "/" . "tagesmenu/";
 
         if (!file_exists($uploaddir)) {
           //Create our directory if it does not exist
@@ -27,12 +27,32 @@ if ( ! in_array( $_FILES['artikelbild']['type'] , $zugelassenedateitypen ))
         }
 
         $tagesmenu = $uploaddir ; //. dateiname_bereinigen(basename($_FILES['speisekarte']['name']));
-        $dateiname = "tagesmenu.pdf";
+        $dateiname = "tagesmenu";
         if ( $_FILES['tagesmenu']['name'] <> '' ) 
         {
+          $imageFileType = strtolower(pathinfo($_FILES['tagesmenu']['name'],PATHINFO_EXTENSION));
           // if (move_uploaded_file($_FILES['speisekarte']['tmp_name'], $speisekarte)) {
+          switch ($imageFileType) {
+              case "pdf":
+                  $dateiname = $dateiname . ".pdf";
+                  break;
+              case "jpg":
+                  $dateiname = $dateiname . ".jpg";
+                  break;
+              case "png":
+                  $dateiname = $dateiname . ".png";
+                  break;
+              case "jpeg":
+                  $dateiname = $dateiname . ".jpeg";
+                  break;
+              case "gif":
+                  $dateiname = $dateiname . ".gif";
+                  break;
+            }
             if (move_uploaded_file($_FILES['tagesmenu']['tmp_name'], $tagesmenu . $dateiname)) {
+              $pfad = $tagesmenu . $dateiname;
               $mysqli->query("UPDATE users SET tagesmenu='1' WHERE id='$result_id'");
+              $mysqli->query("UPDATE Tagesmenu SET tagesmenu_PFAD='$pfad' WHERE Kunden_ID='$result_id'");
             echo "Tagesmenu ist valide und wurde erfolgreich angelegt. \n";
           } else {
               echo "Möglicherweise eine Dateiupload-Attacke! \n";

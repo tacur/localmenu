@@ -9,10 +9,12 @@ $kundenid = $_SESSION['kunde_id'];
 $result = $mysqli->query("SELECT * FROM users WHERE id='$kundenid'");
 $result1 = mysqli_fetch_assoc($result);
 $tagesmenu = $result1['tagesmenu'];
-echo "KundenID = " . $kundenid;
+// echo "KundenID = " . $kundenid;
 //echo "ID: " . $kunde_id;
 //echo "Vorname: " . $kunde_name;
-
+$result_tagesmenu = $mysqli->query("SELECT * FROM Tagesmenu WHERE Kunden_ID='$kundenid'");
+$result_TM = mysqli_fetch_assoc($result_tagesmenu);
+$result_TM_Pfad = $result_TM['tagesmenu_PFAD'];
 ?>
 
 <!doctype html>
@@ -37,7 +39,7 @@ echo "KundenID = " . $kundenid;
 		} else {
 			if ($tagesmenu == "1"){
 				// echo '<object data="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"></object>';
-				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/Kunden/'. $kundenid.'/tagesmenu/tagesmenu.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
+				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/'. $result_TM_Pfad.'" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
 			 	// echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
 			  }else{
 				// echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width=100% height=100% type=application/pdf>';

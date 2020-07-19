@@ -72,20 +72,22 @@ if ($kunde_id == ""){
 				</div>
 				<div class="sticks"></div>
 			</label>
-			<div id="vorschlagsliste" class="list-group" style="display:none;margin: auto;margin-top:-190px;margin-bottom:100px;color: var(--grundfarbe);position: relative;z-index: 1;font-size: large;max-height: 200px;overflow: auto;
+			<div style="margin: 0px 20px;">
+				<div id="vorschlagsliste" class="list-group" style="display:none;margin: auto;margin-top:-190px;margin-bottom:100px;color: var(--grundfarbe);position: relative;z-index: 1;font-size: large;max-height: 200px;overflow: auto;
 									background: var(--secondary);border: 2px var(--grundfarbe) solid;padding:10px;"></div>
-			
-
-
+			</div>
+			<div style="margin: 30px 30px;text-align:center;">
+				<a style="font-size: 18px;background: var(--third);color: var(--secondary);border-radius: 5px;padding: 5px;" href="https://localmenu.de/info" class="links" target="_blank">Wer wir sind?</a>
+			</div>
 	<hr class="style-two">
 	<footer class="container-fluid text-footer" style="text-align:center;">
 	<!-- <p><a style="font-size: 12px;" href="#myModal2" class="links" id="modal-trigger2" data-toggle="modal">Allgemeine Geschäftsbedingungen</a></p> -->
-	<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--grundfarbe);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
+	<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--third);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
 	<hr class="style-two">
-	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
+	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--third)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
 	</footer>
 	<div id="cookieConsent">
 			    <div id="closeCookieConsent"><i class="material-icons">close</i></div>
@@ -170,15 +172,15 @@ if ($kunde_id == ""){
 	// Postleitzahl bei Eingabe 
 	$(document).ready(function(){  
 		$("input").keyup(function() {
-			if ($("input").val().length > 0){
+			if ($("input").val().length > 2){
 				var input = $("input").val();
 				$.post("kundensuche.php", {
 					datainput : input
 				}, function(data, status){
-					if (data.length >= 15){
+					alert(data);
+					if (data.length >= 10){
 						var list = new Array();
 						var kunde = new Array();
-						// alert(data);
 						var list = data.split("%");
 						x = 0;
 						y = list.length;
@@ -288,8 +290,11 @@ if ($kunde_id == ""){
 </script>
 <script type="text/javascript">
   function frameload(){
-	document.getElementById('loading').style.display = 'none';
-	document.getElementById('loading2').style.display = 'none';
+	  if(document.getElementById('loading')) {
+		document.getElementById('loading').style.display = 'none';
+	  }else {
+		document.getElementById('loading2').style.display = 'none';
+	  }
   }
 </script>
 </body>
