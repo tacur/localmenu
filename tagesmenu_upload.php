@@ -49,10 +49,12 @@ if ( ! in_array( $_FILES['artikelbild']['type'] , $zugelassenedateitypen ))
                   $dateiname = $dateiname . ".gif";
                   break;
             }
-            if (move_uploaded_file($_FILES['tagesmenu']['tmp_name'], $tagesmenu . $dateiname)) {
-              $pfad = $tagesmenu . $dateiname;
+            $dateiname = $tagesmenu . $dateiname;
+            if (move_uploaded_file($_FILES['tagesmenu']['tmp_name'], $dateiname)) {
               $mysqli->query("UPDATE users SET tagesmenu='1' WHERE id='$result_id'");
-              $mysqli->query("UPDATE Tagesmenu SET tagesmenu_PFAD='$pfad' WHERE Kunden_ID='$result_id'");
+              $result = $mysqli->query("SELECT * FROM Tagesmenu WHERE Kunden_ID='$result_id'");
+              $sql = "UPDATE Tagesmenu SET tagesmenu_PFAD='$dateiname' WHERE Kunden_ID='$result_id'"
+              $mysqli->query($sql);
             echo "Tagesmenu ist valide und wurde erfolgreich angelegt. \n";
           } else {
               echo "Möglicherweise eine Dateiupload-Attacke! \n";

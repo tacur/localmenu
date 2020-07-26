@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 if ($tagesmenu == "1"){
                   echo '<a class="btn btn-primary" href="'. $result_TM_Pfad.'" download>Tagesmenu herunterladen</a>';
                 }else{
-                  echo '<a class="btn btn-primary" href="Kunden/tagesmenu/tagesmenu.pdf" download>Tagesmenu herunterladen</a>';
+                  echo '<a class="btn btn-primary" href="dateien/tagesmenu.pdf" download>Tagesmenu herunterladen</a>';
                 }
         ?>
         <br>
