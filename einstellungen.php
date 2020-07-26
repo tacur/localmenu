@@ -6,15 +6,16 @@ $email = $_SESSION['email'];
 
 $result = $mysqli->query("SELECT * FROM users WHERE email='$email'");
 $result_kunde = mysqli_fetch_assoc($result);
-$name = utf8_encode($result_kunde['name']);
-$first_name = utf8_encode($result_kunde['first_name']);
-$last_name = utf8_encode($result_kunde['last_name']);
-$strasse = utf8_encode($result_kunde['strasse']);
-$hausnummer = utf8_encode($result_kunde['hausnummer']);
-$ort = utf8_encode($result_kunde['ort']);
+$name = $result_kunde['name'];
+$first_name = $result_kunde['first_name'];
+$last_name = $result_kunde['last_name'];
+$strasse = $result_kunde['strasse'];
+$hausnummer = $result_kunde['hausnummer'];
+$ort = $result_kunde['ort'];
 $postleitzahl = $result_kunde['postleitzahl'];
-$telefonnummer = utf8_encode($result_kunde['telefonnummer']);
+$telefonnummer = $result_kunde['telefonnummer'];
 $speisekarte_direkt = $result_kunde['speisekarte_direkt'];
+$speisekarte_pdf = $result_kunde['speisekarte_pdf'];
 /*
 $facebook = utf8_encode($result_kunde['facebook']);
 $instagram = utf8_encode($result_kunde['instagram']);
@@ -104,11 +105,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   <h1 class="header__title">Daten ändern</h1>
     <form class="needs-validation" id="data" enctype="multipart/form-data" validate style="display: flex; flex-direction: column;border:unset;">
     <div class="form-row" >
-          <div class="col-md-12 mb-3">
-          <label for="speisekarte">Speisekarte-Direktaufruf aktivieren</label>
+          <div class="col-md-6 mb-3">
+          <label for="speisekarte">Speisekarte-Direktaufruf</label>
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" name="speisekarte" id="speisekarte" <?php if($speisekarte_direkt =='on'){ echo "checked";} ?>>
                 <label class="custom-control-label" for="speisekarte">aktivieren</label>
+              </div>
+          </div>
+          <div class="col-md-6 mb-3">
+          <label for="speisekarte_pdf">Menus als PDF aufrufen</label>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="speisekarte_pdf" id="speisekarte_pdf" <?php if($speisekarte_pdf =='on'){ echo "checked";} ?>>
+                <label class="custom-control-label" for="speisekarte_pdf">aktivieren</label>
               </div>
           </div>
       </div>

@@ -39,11 +39,11 @@ $result_TM_Pfad = $result_TM['tagesmenu_PFAD'];
 		} else {
 			if ($tagesmenu == "1"){
 				// echo '<object data="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"></object>';
-				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/'. $result_TM_Pfad.'" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
+				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/'. $result_TM_Pfad.'" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
 			 	// echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
 			  }else{
 				// echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width=100% height=100% type=application/pdf>';
-				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/tagesmenu/tagesmenu.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
+				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/tagesmenu/tagesmenu.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
 			  }
 		}
 		

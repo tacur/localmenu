@@ -27,22 +27,22 @@ echo "KundenID = " . $kundenid;
   	
 	<title>LocalMenu</title>
 </head>
-<body>
+<body >
 	<div class="cd-fold-content single-page">
-		<h2>Speisekarte</h2>
+		<h2 onload="checkIframeLoaded();">Speisekarte</h2>
 		<div class="lds-ellipsis" id="loading"><div></div><div></div><div></div><div></div></div>
 		<?php
 		if ($kundenid == "X") {
-			echo '<iframe src="dateien/speisekarte.pdf" width="100%" onload="frameload()" height="100%"> </iframe>';
+			echo '<iframe id="i_frame" src="dateien/speisekarte.pdf" width="100%" onload="frameload()" height="100%"></iframe>';
 		} else {
 			if ($speisekarte == "1"){
 				// echo '<object data="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"></object>';
-				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
-			 	// echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
+				echo '<iframe id="i_frame" src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
+					// echo '<iframe src="Kunden/'. $kundenid.'/speisekarte/speisekarte.pdf" width="100%" height="100%"> </iframe>';
 			  }else{
 				// echo '<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" width=100% height=100% type=application/pdf>';
-				echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
-			  }
+				echo '<iframe id="i_frame" src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/speisekarte.pdf" onload="frameload()" width=100% height=100% type=application/pdf></iframe>';
+				}
 		}
 		
 		?>

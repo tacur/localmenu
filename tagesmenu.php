@@ -165,9 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         <h3>Aktuelles Tagesmenu</h3>
         <?php 
                 if ($tagesmenu == "1"){
-                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/'. $result_TM_Pfad.'" width="100%" height="500px"> </iframe>';
+                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/'. $result_TM_Pfad.'" width="100%" height="500px"> </iframe>';
                 }else{
-                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://dev.localmenu.de/dateien/tagesmenu.pdf" width="100%" height="500px"> </iframe>';
+                  echo '<iframe src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://localmenu.de/dateien/tagesmenu.pdf" width="100%" height="500px"> </iframe>';
                 }
         ?>
         <br>

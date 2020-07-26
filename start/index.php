@@ -25,7 +25,7 @@ if ($kunde_id == ""){
 <html lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
 	<link href='https://fonts.googleapis.com/css?family=Vollkorn|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<!--===============================================================================================-->
@@ -80,9 +80,8 @@ if ($kunde_id == ""){
 				<a style="font-size: 18px;background: var(--third);color: var(--secondary);border-radius: 5px;padding: 5px;" href="https://localmenu.de/info" class="links" target="_blank">Wer wir sind?</a>
 			</div>
 	<hr class="style-two">
-	<footer class="container-fluid text-footer" style="text-align:center;">
+	<footer class="container-fluid text-footer" style="text-align:center;padding:unset;">
 	<!-- <p><a style="font-size: 12px;" href="#myModal2" class="links" id="modal-trigger2" data-toggle="modal">Allgemeine Geschäftsbedingungen</a></p> -->
-	<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--third);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
 	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
@@ -190,7 +189,7 @@ if ($kunde_id == ""){
 							
 							var kunde = list[x].split(",");
 							if(item.length >= 15){
-								document.getElementById("vorschlagsliste").innerHTML += "<a href='https://dev.localmenu.de/?kunde=" + kunde[4] + "' id='" + kunde[4] + "' class='list-group-item' style='background-color:unset;border:unset;text-decoration:none;color:var(--grundfarbe);margin:5px;'>" + kunde[0] + ", " + kunde[1] + " " + kunde[2] + " " + kunde[3] +"</a>";
+								document.getElementById("vorschlagsliste").innerHTML += "<a href='https://localmenu.de/?kunde=" + kunde[4] + "' id='" + kunde[4] + "' class='list-group-item' style='background-color:unset;border:unset;text-decoration:none;color:var(--grundfarbe);margin:5px;'>" + kunde[0] + ", " + kunde[1] + " " + kunde[2] + " " + kunde[3] +"</a>";
 							}
 							x = x + 1 ;
 

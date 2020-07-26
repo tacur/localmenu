@@ -14,6 +14,9 @@ $kunde_ort = $kunde_erg['ort'];
 $kunde_plz = utf8_encode($kunde_erg['postleitzahl']);
 $speisekarte_direkt= $kunde_erg['speisekarte_direkt'];
 $profilbild= $kunde_erg['profilbild'];
+$speisekarte_pdf = $kunde_erg['speisekarte_pdf'];
+$speisekarte = $kunde_erg['speisekarte'];
+$tagesmenu = $kunde_erg['tagesmenu'];
 
 $result_tagesmenu = $mysqli->query("SELECT * FROM Tagesmenu WHERE Kunden_ID='$kundenid'");
 $result_TM = mysqli_fetch_assoc($result_tagesmenu);
@@ -43,7 +46,7 @@ if ($kunde_id == ""){
 <html lang="en" class="no-js">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
 	<link href='https://fonts.googleapis.com/css?family=Vollkorn|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<!--===============================================================================================-->
@@ -69,7 +72,6 @@ if ($kunde_id == ""){
 	<link id="pagestyle" rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 	<script src="js/easy.qrcode.min.js"></script>
-	<script data-ad-client="ca-pub-4646915547116269" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<title>LOCALMENU</title>
 </head>
 <body>
@@ -110,36 +112,98 @@ if ($kunde_id == ""){
 					<div class="col-sm-6" style="padding-bottom: 5px;">
 							<div class="card bg-dark" style="overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
 							box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;">
-								<ul class="cd-gallery">
-									<li class="cd-item" >
-										<a href="item-1.php/?kunde=<?php echo $kunde_id;?>" id="speisekarte_direkt">
-											<div>
-												<img src="img/menu_icon.png" class="cd-item-logo" />
-												<br>
-												<h2 >Speisekarte</h2>
-											</div>
-										</a>
-									</li>
-								</ul>
+								<?php
+								if($speisekarte_pdf != "on") {
+									echo'<ul class="cd-gallery" data-type="" >
+											<li class="cd-item" >
+												<a href="item-1.php/?kunde='.  $kunde_id. '" id="speisekarte_direkt" data-type="">
+													<input hidden id="speisekarte_aufruf" value="1" />
+													<div>
+														<img src="img/menu_icon.png" class="cd-item-logo" />
+														<br>
+														<h2 >Speisekarte</h2>
+													</div>
+												</a>
+											</li>	
+										</ul>';
+								}else {
+									if ($speisekarte == "1"){
+										echo'<ul class="cd-gallery" data-type="aufruf">
+												<li class="cd-item" >
+													<a href="Kunden/'.  $kunde_id. '/speisekarte/speisekarte.pdf" target="_blank" id="speisekarte_pdf" data-type="aufruf">
+														<input hidden id="speisekarte_aufruf" value="0" />
+														<div>
+															<img src="img/menu_icon.png" class="cd-item-logo" />
+															<br>
+															<h2 >Speisekarte</h2>
+														</div>
+													</a>
+												</li>
+											</ul>';
+									}else{
+										echo'<ul class="cd-gallery" data-type="aufruf">
+												<li class="cd-item" >
+													<a href="/dateien/speisekarte.pdf" target="_blank" id="speisekarte_pdf" data-type="aufruf">
+														<input hidden id="speisekarte_aufruf" value="0" />
+														<div>
+															<img src="img/menu_icon.png" class="cd-item-logo" />
+															<br>
+															<h2 >Speisekarte</h2>
+														</div>
+													</a>
+												</li>
+											</ul>';
+									}
+								}
+								?>
+								
 							</div>	
 					</div>
 			<?php
 				if (strlen($result_TM_Pfad) > 5 ) {
 					echo "<div class='col-sm-6' style='padding-bottom: 5px;'>
 							<div class='card bg-dark' style='overflow: hidden;min-width: 100%; border-radius: 2rem; background: var(--secondary); 
-								box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;'>
-								<ul class='cd-gallery'>
-									<li class='cd-item' >
-										<a href='item-5.php/?kunde=" .  $kunde_id . "'>
-											<div>
-												<img src='img/tagesmenu_icon.png' class='cd-item-logo' />
-												<br>
-												<h2 >Tagesmenu</h2>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>	
+								box-shadow: 2px 3px 13px rgba(0,0,0,0.75), 0 10px 10px rgba(0,0,0,0.22);border:unset;'>";
+							if($speisekarte_pdf != "on"){ 
+								echo "<ul class='cd-gallery' data-type=''>
+										<li class='cd-item' >
+											<a href='item-5.php/?kunde=" .  $kunde_id . "'>
+												<div>
+													<img src='img/tagesmenu_icon.png' class='cd-item-logo' />
+													<br>
+													<h2 >Tagesmenu</h2>
+												</div>
+											</a>
+										</li>
+									</ul>";
+							}else{
+								if ($tagesmenu == "1"){
+									echo "<ul class='cd-gallery' data-type='aufruf'>
+											<li class='cd-item' >
+												<a href='" . $result_TM_Pfad . "' target='_blank' data-type='aufruf'>
+													<div>
+														<img src='img/tagesmenu_icon.png' class='cd-item-logo' />
+														<br>
+														<h2 >Tagesmenu</h2>
+													</div>
+												</a>
+											</li>
+										</ul>";
+								}else{
+									echo "<ul class='cd-gallery' data-type='aufruf'>
+											<li class='cd-item' >
+												<a href='/dateien/tagesmenu.pdf' target='_blank' data-type='aufruf'>
+													<div>
+														<img src='img/tagesmenu_icon.png' class='cd-item-logo' />
+														<br>
+														<h2 >Tagesmenu</h2>
+													</div>
+												</a>
+											</li>
+										</ul>";
+								}
+							}
+					echo "	</div>	
 						</div>";
 				}
 					
@@ -152,9 +216,9 @@ if ($kunde_id == ""){
 									<li class="cd-item">		
 									<a href="item-2.php/?kunde=<?php echo $kunde_id;?>" >
 											<div>
-												<img src="img/uhrzeit_icon_neu.png" class="cd-item-logo" />
+												<img src="img/haus.png" class="cd-item-logo" />
 												<br>
-												<h2 >Kontakt/Öffnungszeiten</h2>
+												<h2 >Infos</h2>
 											</div>
 										</a>
 									</li>
@@ -198,10 +262,10 @@ if ($kunde_id == ""){
 	<hr class="style-two">
 	<footer class="container-fluid text-footer" style="text-align:center;">
 	<!-- <p><a style="font-size: 12px;" href="#myModal2" class="links" id="modal-trigger2" data-toggle="modal">Allgemeine Geschäftsbedingungen</a></p> -->
-	<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--grundfarbe);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>
-	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
-	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
-	<p><a style="font-size: 16px;margin-bottom:10px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
+	<!--<p style="margin-bottom: 10px;"><a style="font-size: 16px;display: inline-block;background: var(--grundfarbe);color: var(--secondary);border-radius: 5px;padding: 5px;" href="login.php" class="links" target="_blank">Anmelden/Registrieren</a></p>-->
+	<p><a style="font-size: 16px;margin:15px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Allgemeine Geschäftsbedingungen</a></p>
+	<p><a style="font-size: 16px;margin:15px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Datenschutzerklärung</a></p>
+	<p><a style="font-size: 16px;margin:15px;" href="agbs_datenschutz_impressum.html" class="links" target="_blank">Impressum</a></p>
 	<hr class="style-two">
 	<p style="margin-top: 20px;;">Copyright © 2020 <a style="color: var(--grundfarbe)" href="agbs_datenschutz_impressum.html" target="_blank" title="LOCALMENU">LOCALMENU</a>. </br>Alle Rechte vorbehalten.</p>
 	</footer>
@@ -356,12 +420,13 @@ if ($kunde_id == ""){
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <?php 
 if ($speisekarte_direkt != ""){
+	if ($speisekarte_pdf != "on"){
 		echo "<script> 	$(document).ready(function(){   
 			document.getElementById('speisekarte_direkt').click();
 		});
 		</script>";
-	
 	}
+}
 ?>
 <script type="text/javascript">
 	// ##### COOKIE DARKMODE ######
@@ -554,6 +619,29 @@ frm.submit(function(e) {
 		document.getElementById('loading2').style.display = 'none';
 	  }
   }
+  function iframe(){
+	setTimeout(function(){
+		if()
+	}, 3000);
+  }
+</script>
+<script>
+	function checkIframeLoaded() {
+		var iframe = document.getElementById('i_frame');
+		var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+		if (  iframeDoc.readyState  == 'complete' ) {
+			iframe.contentWindow.onload = function(){
+				console.log("geladen");
+			};
+			afterLoading();
+			return;
+		} 
+		window.setTimeout(checkIframeLoaded, 100);
+	}
+	function afterLoading(){
+		console.log("iframe is durch");
+	}
 </script>
 </body>
 </html>

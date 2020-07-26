@@ -19,6 +19,7 @@ $kunde_ort = $mysqli->escape_string($_POST['ort']);
 $kunde_plz = $mysqli->escape_string($_POST['plz']);
 $kunde_telefonnummer = $mysqli->escape_string($_POST['telefonnummer']);
 $kunde_speisekarte = $mysqli->escape_string($_POST['speisekarte']);
+$kunde_speisekarte_pdf = $mysqli->escape_string($_POST['speisekarte_pdf']);
 /*
 $kunde_facebook = $mysqli->escape_string($_POST['kunde_facebook']);
 $kunde_instagram = $mysqli->escape_string($_POST['kunde_instagram']);
@@ -27,7 +28,7 @@ $kunde_instagram = $mysqli->escape_string($_POST['kunde_instagram']);
 $sql = "UPDATE users SET name='$kunde_name',first_name='$kunde_ort',last_name='$kunde_plz',"
         . "strasse='$kunde_strasse', hausnummer='$kunde_nummer',"
         . "ort='$kunde_ort',postleitzahl='$kunde_plz',"
-        . "speisekarte_direkt='$kunde_speisekarte' "
+        . "speisekarte_direkt='$kunde_speisekarte',speisekarte_pdf='$kunde_speisekarte_pdf' "
         . "WHERE id='$result_id'";
 
     // echo $sql;

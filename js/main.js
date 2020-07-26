@@ -4,10 +4,17 @@ jQuery(document).ready(function($){
 		foldingPanel = $('.cd-folding-panel'),
 		mainContent = $('.cd-main');
 	/* open folding content */
-	gallery.on('click', 'a', function(event){
-		event.preventDefault();
-		openItemInfo($(this).attr('href'));
-	});
+	
+		gallery.on('click', 'a', function(event){
+			console.log($(this).attr("data-type"));
+			if ($(this).attr("data-type") != "aufruf"){
+				event.preventDefault();
+				openItemInfo($(this).attr('href'));
+			}else{
+				console.log("In a" + $(this).attr("data-type"));
+			}
+		});
+	
 
 	/* close folding content */
 	foldingPanel.on('click', '.cd-close', function(event){
@@ -16,7 +23,11 @@ jQuery(document).ready(function($){
 	});
 	gallery.on('click', function(event){
 		/* detect click on .cd-gallery::before when the .cd-folding-panel is open */
-		if($(event.target).is('.cd-gallery') && $('.fold-is-open').length > 0 ) toggleContent('', false);
+		if ($(this).attr("data-type") != "aufruf"){
+			if($(event.target).is('.cd-gallery') && $('.fold-is-open').length > 0 ) toggleContent('', false);
+		}else{
+			console.log("nicht in a" + $(this).attr("data-type"));
+		}
 	})
 
 	
